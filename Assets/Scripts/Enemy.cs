@@ -1,31 +1,35 @@
 using UnityEngine;
 
-public class Enemy : MonoBehaviour
+public class Enemy : Character
 {
-    [Header("Объект к которому будет притягиваться текущий объект")] [SerializeField]
-    private GameObject Player;
+    [SerializeField] private GameObject player;
 
-    private Rigidbody _rigidbody;
-
-    private float speed = 0.1f;
-
-    private void Awake()
+    // Start is called before the first frame update
+    void Start()
     {
+        // player = GameObject.FindWithTag("Player");
         _rigidbody = GetComponent<Rigidbody>();
     }
 
-    void Start()
-    {
-    }
-
+    // Update is called once per frame
     void Update()
     {
-        Movement();
+        MovementEnemy();
+        DestroyEnemy();
     }
 
-    private void Movement()
+    private void MovementEnemy()
     {
-        _rigidbody.AddForceAtPosition((Player.transform.position - transform.position) * speed,
-            Player.transform.position);
+        _rigidbody.AddForceAtPosition((player.transform.position - transform.position).normalized * Speed,
+            player.transform.position);
+    }
+
+    private void DestroyEnemy()
+    {
+        if (Health == 0)
+        {
+            Destroy(gameObject);
+            Debug.Log($"У объекта {gameObject.name} закончилось здоровье, поэтому он уничтожен ");
+        }
     }
 }
