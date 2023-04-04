@@ -1,22 +1,23 @@
 using System;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UiManager : MonoBehaviour
 {
-    [SerializeField] private GameObject managers;
+    [SerializeField] private GameObject coinText;
 
-    private TextMeshPro _coinText;
+    private TextMeshProUGUI _coinText;
 
     private void Awake()
     {
+        _coinText = coinText.GetComponent<TextMeshProUGUI>();
     }
 
     void Start()
     {
-        var resourceManager = managers.GetComponent<ResourceManager>();
-        resourceManager.OnCoinChange += ChangeCoinValue;
-        _coinText = GetComponent<TextMeshPro>();
+        
+        
     }
 
     void Update()
@@ -25,8 +26,10 @@ public class UiManager : MonoBehaviour
 
     public void ChangeCoinValue(int value)
     {
-        Debug.Log("Метод ChangeCoinValue выполнен");
-        _coinText.text = $"{value}";
-        _coinText.text = "value";
+        if (_coinText != null)
+        {
+            Debug.Log("Метод ChangeCoinValue выполнен");
+            _coinText.text = $"{value}";
+        }   
     }
 }

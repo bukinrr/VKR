@@ -1,8 +1,11 @@
+using System;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class ResourceManager : MonoBehaviour
 {
     private int _coin = 0;
+    [SerializeField] private UiManager uiManager;
 
     public int Coin
     {
@@ -14,6 +17,17 @@ public class ResourceManager : MonoBehaviour
 
     public event CoinChangeDelegate OnCoinChange;
 
+    private void Awake()
+    {
+        if (uiManager != null)
+        {
+            OnCoinChange += uiManager.ChangeCoinValue;
+        }
+        else
+        {
+            Debug.LogError("ResourceManager: uiManager is null!");
+        }
+    }
 
     void Start()
     {
@@ -25,8 +39,13 @@ public class ResourceManager : MonoBehaviour
 
     public void AddCoins(int coinsValue)
     {
+        _coin += coinsValue;
         Debug.Log($"coins = {_coin}");
-        _coin = coinsValue;
+        if (OnCoinChange == null)
+        {
+            Debug.Log("Пожрал говна");
+        }
+
         OnCoinChange?.Invoke(_coin);
     }
 }
