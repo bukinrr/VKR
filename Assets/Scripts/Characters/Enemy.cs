@@ -3,18 +3,21 @@ using UnityEngine;
 public class Enemy : Character
 {
     [SerializeField] private GameObject player;
+    private PlayerController _playerController;
 
     [SerializeField] private GameObject managers;
     private ResourceManager _resourceManager;
 
     [SerializeField] private float attackDistance = 2f;
-    [SerializeField] private float attackInterval = 2f;
-    [SerializeField] private float lastAttackTime = 0;
+    [SerializeField] private float lastAttackTime;
+    private float _attackTime;
 
     void Start()
     {
         _rigidbody = GetComponent<Rigidbody>();
         _resourceManager = managers.GetComponent<ResourceManager>();
+        _playerController = player.GetComponent<PlayerController>();
+        _attackTime = GetTotalAttackSpeed();
     }
 
     void Update()
@@ -27,7 +30,7 @@ public class Enemy : Character
     private void AttackDistance()
     {
         float distance = Vector3.Distance(transform.position, player.transform.position);
-        if (distance <= attackDistance && Time.time - lastAttackTime >= attackInterval)
+        if (distance <= attackDistance && Time.time - lastAttackTime >= _attackTime)
         {
             lastAttackTime = Time.time;
             Attack();
@@ -36,8 +39,8 @@ public class Enemy : Character
 
     private void Attack()
     {
-        player.GetComponent<Player>().GetDamage(Damage);
-        Debug.Log($"Enemy наносит урон существу{player.gameObject.name}");
+        _playerController.GetDamage(Damage);
+        Debug.Log($"Enemy наносит урон существу{player.gameObject.name}, у него осталось {_playerController.Health}");
     }
 
     private void MovementEnemy()

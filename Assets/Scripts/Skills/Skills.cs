@@ -11,13 +11,11 @@ public abstract class Skills : MonoBehaviour
     {
         
     }
-    private string _nameSkill;
     void Start()
     {
         
     }
-    //Разобрать этот метод(в плане понимания )
-    
+
     void Update()
     {
         

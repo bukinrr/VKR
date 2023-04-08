@@ -6,54 +6,94 @@ public abstract class Character : MonoBehaviour
     [SerializeField] private int damage;
     [SerializeField] private float speed;
     [SerializeField] private float armor;
+
+    [SerializeField] private float boostAtackSpeed;
+    private const float BaseAttackTime = 2f;
+    private const float NormalAttackSpeed = 100f;
+    private const float AttackSpeedCoefficient = 0.01f;
+
     protected Rigidbody _rigidbody;
 
-    protected int Health
+    public int Health
     {
         get => health;
-        set => health = Mathf.Clamp(value, 0, 10);
+        protected set => Mathf.Clamp(value, 0, 10);
     }
 
-    protected int Damage
+    public int Damage
     {
         get => damage;
-        set => damage = Mathf.Clamp(value, 0, 1000);
+        protected set => damage = Mathf.Clamp(value, 0, 1000);
     }
 
-    protected float Armor
+    public float AttackSpeed
+    {
+        get => boostAtackSpeed;
+        protected set => boostAtackSpeed = Mathf.Clamp(value, -80, 600);
+    }
+
+    public float Armor
     {
         get => armor;
-        set => armor = Mathf.Clamp(value, 0, 1000);
+        protected set => armor = Mathf.Clamp(value, 0, 100);
     }
 
-    protected float Speed
+    public float Speed
     {
         get => speed;
-        set => speed = value;
+        protected set => speed = Mathf.Clamp(value, 0, 1700);
     }
-
-    void Start()
-    {
-    }
-
-    // public void ChangeHealth(int health)
-    // {
-    //     Mathf.Clamp(health, 0, 10);
-    // }
-    //
-    // public void ChangerArmor(float armor)
-    // {
-    //     Mathf.Clamp(armor, 0, 1000);
-    // }
-    //
-    // public void ChangeDamage(int damage)
-    // {
-    //     Mathf.Clamp(damage, 0, 1000);
-    // }
 
     public void GetDamage(int damage)
     {
-        health = Mathf.Clamp(health - damage, 0, health);
+        Health -= Mathf.Clamp(damage, 0, 1000);
         // Debug.Log($"Наношу урон существу: {gameObject.name}  в количестве {damage}, У существа осталось {health} хп");
+    }
+
+    public void IncreaseDamage(object sender, int amount)
+    {
+        Damage += amount;
+    }
+
+    public void ReduceDamage(object sender, int amount)
+    {
+        Damage -= amount;
+    }
+
+    public void IncreaseAttackSpeed(object sender, int amount)
+    {
+        AttackSpeed -= amount;
+    }
+
+    public void ReduceAttackSpeed(object sender, int amount)
+    {
+        AttackSpeed -= amount;
+    }
+
+    public void IncreaseSpeed(object sender, int amount)
+    {
+        Speed += amount;
+    }
+
+    public void ReduceSpeed(object sender, int amount)
+    {
+        Speed -= amount;
+    }
+
+    public void IncreaseArmor(object sender, int amount)
+    {
+        Armor += amount;
+    }
+
+    public void ReduceArmor(object sender, int amount)
+    {
+        Armor -= amount;
+    }
+
+    protected float GetTotalAttackSpeed()
+    {
+        var attackPerSecond = (NormalAttackSpeed + boostAtackSpeed) * AttackSpeedCoefficient / BaseAttackTime;
+        var attackTime = 1 / attackPerSecond;
+        return attackTime;
     }
 }
