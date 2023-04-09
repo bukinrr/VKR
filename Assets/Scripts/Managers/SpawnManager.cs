@@ -44,6 +44,6 @@ public class SpawnManager : MonoBehaviour
         float rndXMinus = -Random.Range(minBorder, maxBorder);
         float rndZMinus = -Random.Range(minBorder, maxBorder);
 
-        return new Vector3(Random.Range(rndXMinus, rndX), 0.5f, Random.Range(rndZMinus, rndZ));
+        return new Vector3(Random.Range(rndXMinus, rndX), 0, Random.Range(rndZMinus, rndZ));
     }
 }

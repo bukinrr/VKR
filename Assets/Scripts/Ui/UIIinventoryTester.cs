@@ -1,6 +1,4 @@
-using System;
 using System.Collections.Generic;
-using Inventory.Items;
 using Random = UnityEngine.Random;
 
 public class UIIinventoryTester

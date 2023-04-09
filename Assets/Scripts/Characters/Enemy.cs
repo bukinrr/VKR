@@ -17,7 +17,7 @@ public class Enemy : Character
         _rigidbody = GetComponent<Rigidbody>();
         _resourceManager = managers.GetComponent<ResourceManager>();
         _playerController = player.GetComponent<PlayerController>();
-        _attackTime = GetTotalAttackSpeed();
+        //_attackTime = GetTotalAttackSpeed();
     }
 
     void Update()
@@ -33,18 +33,22 @@ public class Enemy : Character
         if (distance <= attackDistance && Time.time - lastAttackTime >= _attackTime)
         {
             lastAttackTime = Time.time;
-            Attack();
+            //Attack();
         }
     }
 
-    private void Attack()
-    {
-        _playerController.GetDamage(Damage);
-        Debug.Log($"Enemy наносит урон существу{player.gameObject.name}, у него осталось {_playerController.Health}");
-    }
+    // private void Attack()
+    // {
+    //     _playerController.GetDamage(Damage);
+    //     Debug.Log($"Enemy наносит урон существу{player.gameObject.name}, у него осталось {_playerController.Health}");
+    // }
 
     private void MovementEnemy()
     {
+        var playerPosition = player.gameObject.transform.position;
+        transform.LookAt(playerPosition);
+        // transform.position = Vector3.MoveTowards(transform.position, playerPosition,
+        //     Speed * Time.deltaTime);
         Vector3 direction = (player.transform.position - transform.position).normalized;
         _rigidbody.AddForceAtPosition(direction * Speed, player.transform.position);
     }

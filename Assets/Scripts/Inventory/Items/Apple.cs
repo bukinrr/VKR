@@ -1,7 +1,5 @@
 using System;
 
-namespace Inventory.Items
-{
     public class Apple : IInventoryItem
     {
         public bool isEquiped { get; set; }
@@ -22,4 +20,3 @@ namespace Inventory.Items
             return clonedApple;
         }
     }
-}
