@@ -43,7 +43,7 @@ public class ResourceManager : MonoBehaviour
         Debug.Log($"coins = {_coin}");
         if (OnCoinChange == null)
         {
-            Debug.Log("Пожрал говна");
+            //Debug.Log("Пожрал говна");
         }
 
         OnCoinChange?.Invoke(_coin);
