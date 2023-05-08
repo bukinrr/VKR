@@ -1,7 +1,5 @@
-using System;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class UiManager : MonoBehaviour
 {
@@ -12,16 +10,6 @@ public class UiManager : MonoBehaviour
     private void Awake()
     {
         _coinText = coinText.GetComponent<TextMeshProUGUI>();
-    }
-
-    void Start()
-    {
-        
-        
-    }
-
-    void Update()
-    {
     }
 
     public void ChangeCoinValue(int value)

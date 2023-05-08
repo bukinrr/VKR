@@ -29,14 +29,6 @@ public class ResourceManager : MonoBehaviour
         }
     }
 
-    void Start()
-    {
-    }
-
-    void Update()
-    {
-    }
-
     public void AddCoins(int coinsValue)
     {
         _coin += coinsValue;

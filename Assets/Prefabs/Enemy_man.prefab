@@ -1188,7 +1188,7 @@ MonoBehaviour:
   health: 2
   speed: 1
   armor: 2
-  player: {fileID: 8757041624745473047, guid: 415058982d60cd44b85f591b92e315ce, type: 3}
+  player: {fileID: 7391963687937132337, guid: 8bb4a8b47b53ebe479492bf789886309, type: 3}
   managers: {fileID: 491929191901229930, guid: 99972d3e7def0fe4982534ce2a846d96, type: 3}
   attackDistance: 2
   lastAttackTime: 0
