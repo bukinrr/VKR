@@ -31,6 +31,11 @@ public class RangeWeapon : Weapon
 
     private void Start()
     {
+        Init();
+    }
+
+    protected override void Init()
+    {
         AttackType = RangeType.Range;
         _attackTime = GetTotalAttackSpeed();
     }
@@ -43,37 +48,39 @@ public class RangeWeapon : Weapon
 
     protected override GameObject FindTarget()
     {
-        Collider[] hitColliders = Physics.OverlapSphere(transform.position, attackRange);
+        // Первый кто попадет в радиус(не обязательно ближаший к игроку)
+        // Collider[] hitColliders = Physics.OverlapSphere(transform.position, attackRange);
+        //
+        // foreach (var hitCollider in hitColliders)
+        // {
+        //     if (hitCollider.CompareTag("Enemy"))
+        //         return hitCollider.gameObject;
+        // }
+        //
+        // return null;
 
-        foreach (var hitCollider in hitColliders)
+        //ПОИСК БЛИЖАЙШЕГО
+        Collider[] hitColliders = new Collider[10];
+        int numColliders = Physics.OverlapSphereNonAlloc(transform.position, attackRange, hitColliders);
+
+        float closestDistance = Mathf.Infinity;
+        GameObject closestEnemy = null;
+
+        for (int i = 0; i < numColliders; i++)
         {
-            if (hitCollider.CompareTag("Enemy"))
-                return hitCollider.gameObject;
+            if (hitColliders[i].CompareTag("Enemy"))
+            {
+                float distance = Vector3.Distance(transform.position, hitColliders[i].transform.position);
+                if (distance < closestDistance)
+                {
+                    closestDistance = distance;
+                    closestEnemy = hitColliders[i].gameObject;
+                }
+            }
         }
 
-        return null;
-
-        //       ПОИСК БЛИЖАЙШЕГО
-        // Collider[] hitColliders = new Collider[10];
-        // int numColliders = Physics.OverlapSphereNonAlloc(transform.position, attackRange, hitColliders);
-        //
-        // float closestDistance = Mathf.Infinity;
-        // GameObject closestEnemy = null;
-        //
-        // for (int i = 0; i < numColliders; i++)
-        // {
-        //     if (hitColliders[i].CompareTag("Enemy"))
-        //     {
-        //         float distance = Vector3.Distance(transform.position, hitColliders[i].transform.position);
-        //         if (distance < closestDistance)
-        //         {
-        //             closestDistance = distance;
-        //             closestEnemy = hitColliders[i].gameObject;
-        //         }
-        //     }
-        // }
-        // Debug.Log(closestEnemy);
-        // return closestEnemy;
+        Debug.Log(closestEnemy);
+        return closestEnemy;
     }
 
     protected override bool CanAttack(GameObject target)
@@ -88,15 +95,15 @@ public class RangeWeapon : Weapon
         {
             _lastAttackTime = Time.time;
             Vector3 direction = (target.transform.position + Vector3.up - bulletSpawnPoint.position).normalized;
-            
+
             var transformPlayer = GetComponentInParent<PlayerController>().gameObject;
             transformPlayer.transform.LookAt(target.transform);
-            
+
             GameObject bullet = Instantiate(bulletPrefab, bulletSpawnPoint.position, Quaternion.identity);
 
             bullet.transform.forward = direction;
 
-            bullet.GetComponent<Bullet>().Launch();
+            bullet.GetComponent<Bullet>().Launch(Damage);
         }
     }
 

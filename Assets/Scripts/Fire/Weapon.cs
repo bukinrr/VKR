@@ -24,10 +24,10 @@ public abstract class Weapon : MonoBehaviour
         protected set => boostAtackSpeed = Mathf.Clamp(value, -80, 600);
     }
 
-    private int Damage
+    public int Damage
     {
         get => damage;
-        set => damage = Mathf.Clamp(value, 0, Int32.MaxValue);
+        private set => damage = Mathf.Clamp(value, 0, Int32.MaxValue);
     }
 
     public void IncreaseAttackSpeed(object sender, int amount)
@@ -57,6 +57,7 @@ public abstract class Weapon : MonoBehaviour
         return attackTime;
     }
 
+    protected abstract void Init();
     protected abstract GameObject FindTarget();
     protected abstract bool CanAttack(GameObject target);
 }

@@ -530,7 +530,7 @@ Animator:
   m_GameObject: {fileID: 7391963687937132337}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 897b34267f422c1499700402763d096e, type: 3}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 05f86e9ad8e57f34c99ce014550e5b74, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 1
@@ -552,8 +552,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4cfba7fc5e78b545b3fa863b0ab2e65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 7
-  speed: 2
+  health: 0
+  speed: 0
   armor: 2
   BulletPrefab: {fileID: 2088339637601007142, guid: cd5553715871aaa41b215f4bb6f90d4d, type: 3}
 --- !u!136 &7391963688191660000
@@ -584,7 +584,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 126
   m_CollisionDetection: 0
 --- !u!1 &7391963687937135687
 GameObject:

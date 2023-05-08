@@ -130,3 +130,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speedBullet: 20
   maxDistance: 30
+  weapon: {fileID: 11400000, guid: c45e4fdb63fd1084791cc23944c2faf8, type: 2}

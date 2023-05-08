@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 public class Bullet : MonoBehaviour
@@ -6,12 +5,16 @@ public class Bullet : MonoBehaviour
     [SerializeField] private float speedBullet;
     [SerializeField] public float maxDistance;
 
+    private int _damage;
+
     private float distanceTraveled = 0f;
 
-    public void Launch()
+    public void Launch(int damage)
     {
+        _damage = damage;
         GetComponent<Rigidbody>().velocity = transform.forward * speedBullet;
     }
+
 
     private void Update()
     {
@@ -28,13 +31,14 @@ public class Bullet : MonoBehaviour
         {
             Enemy targetEnemyComponent = collision.gameObject.GetComponent<Enemy>();
             Debug.Log($"Хп до удара {targetEnemyComponent.Health}");
-            targetEnemyComponent.GetDamage(this, 2);
+            targetEnemyComponent.GetDamage(this, _damage);
             Debug.Log($"Хп после удара {targetEnemyComponent.Health}");
             Destroy(gameObject);
         }
     }
 
 
+    // Самонаводка
     // private Transform _target;
     //
     // public float direction;

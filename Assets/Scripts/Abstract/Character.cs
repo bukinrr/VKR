@@ -1,4 +1,6 @@
+using System;
 using UnityEngine;
+using UnityEngine.PlayerLoop;
 
 public abstract class Character : MonoBehaviour
 {
@@ -32,6 +34,7 @@ public abstract class Character : MonoBehaviour
         Debug.Log($"Сущетсво {sender} нанесло урон существу {gameObject} в количестве {damage}");
     }
 
+    protected abstract void Init();
 
     public void IncreaseSpeed(object sender, int amount)
     {

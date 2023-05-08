@@ -1091,6 +1091,7 @@ GameObject:
   - component: {fileID: 7073605011180217773}
   - component: {fileID: 7073605011180217745}
   - component: {fileID: 7073605011180217774}
+  - component: {fileID: 8363398506884387070}
   m_Layer: 0
   m_Name: Enemy_man
   m_TagString: Enemy
@@ -1185,12 +1186,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b4f08fc626c1d84ba230b9201440a48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 2
+  health: 5
   speed: 1
   armor: 2
   player: {fileID: 7391963687937132337, guid: 8bb4a8b47b53ebe479492bf789886309, type: 3}
   managers: {fileID: 491929191901229930, guid: 99972d3e7def0fe4982534ce2a846d96, type: 3}
   attackDistance: 2
+  lastAttackTime: 0
+--- !u!114 &8363398506884387070
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7073605011081292982}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e70ef6f7cd428042a33b69b99ffd732, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  boostAtackSpeed: 0
+  damage: 1
+  attackRange: 2
   lastAttackTime: 0
 --- !u!1 &7073605011081294858
 GameObject:

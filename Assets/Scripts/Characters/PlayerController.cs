@@ -3,11 +3,8 @@ using UnityEngine;
 public class PlayerController : Character
 {
     [SerializeField] private GameObject BulletPrefab;
-    private GameObject tmpBullet;
 
     private Transform _target;
-    private float _attackRange = 20f;
-
 
     private float _attackTime;
     private float _lastAttackTime;
@@ -16,19 +13,27 @@ public class PlayerController : Character
 
     void Start()
     {
-        _rigidbody = GetComponent<Rigidbody>();
-        _rangeWeapon = GetComponentInChildren<RangeWeapon>();
+        Init();
     }
 
     void Update()
     {
         _rangeWeapon.LaunchShoot();
-        // DestroyPlayer();
+        DestroyPlayer();
+    }
+
+    protected override void Init()
+    {
+        _rigidbody = GetComponent<Rigidbody>();
+        _rangeWeapon = GetComponentInChildren<RangeWeapon>();
     }
 
     protected void DestroyPlayer()
     {
-        if (Health == 0)
+        if (Health <= 0)
+        {
+            Debug.Log("Объект должен быть уничтожен");
             Destroy(gameObject);
+        }
     }
 }
