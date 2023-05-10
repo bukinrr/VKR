@@ -79,7 +79,7 @@ public class RangeWeapon : Weapon
             }
         }
 
-        Debug.Log(closestEnemy);
+        //Debug.Log(closestEnemy);
         return closestEnemy;
     }
 

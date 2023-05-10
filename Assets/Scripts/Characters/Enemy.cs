@@ -10,6 +10,8 @@ public class Enemy : Character
     private MeleeWeapon _meleeWeapon;
     private float _attackTime;
 
+    [SerializeField] private int coinPerDeath;
+
     void Start()
     {
         Init();
@@ -41,7 +43,7 @@ public class Enemy : Character
     {
         if (Health <= 0)
         {
-            _resourceManager.AddCoins(10);
+            _resourceManager.AddCoins(coinPerDeath);
             Destroy(gameObject);
         }
     }

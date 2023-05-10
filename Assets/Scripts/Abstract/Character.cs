@@ -5,14 +5,18 @@ using UnityEngine.PlayerLoop;
 public abstract class Character : MonoBehaviour
 {
     [SerializeField] private int health;
+
+    [SerializeField] private int maxHealth;
     [SerializeField] private float speed;
     [SerializeField] private float armor;
     protected Rigidbody _rigidbody;
 
+    public event Action<float> HealthChanged;
+
     public int Health
     {
         get => health;
-        private set => health = Mathf.Clamp(value, 0, 10);
+        private set => health = Mathf.Clamp(value, 0, maxHealth);
     }
 
     public float Armor
@@ -35,6 +39,16 @@ public abstract class Character : MonoBehaviour
     }
 
     protected abstract void Init();
+
+    public void IncreaseHealth(object sender, int amount)
+    {
+        Health += amount;
+    }
+
+    public void ReduceHealth(object sender, int amount)
+    {
+        Health -= amount;
+    }
 
     public void IncreaseSpeed(object sender, int amount)
     {
