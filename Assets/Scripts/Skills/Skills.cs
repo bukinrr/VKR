@@ -1,8 +1,15 @@
+using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 public abstract class Skills : MonoBehaviour
 {
-    enum ActiveSKills
+    [SerializeField] private Image skillIcon;
+    [SerializeField] private float skillCooldown;
+
+    [SerializeField] private int openLvl;
+    
+    /*enum ActiveSKills
     {
         
     }
@@ -11,13 +18,6 @@ public abstract class Skills : MonoBehaviour
     {
         
     }
-    void Start()
-    {
-        
-    }
+    */
 
-    void Update()
-    {
-        
-    }
 }
