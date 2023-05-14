@@ -8,10 +8,6 @@ public class SpawnManager : MonoBehaviour
     private int waveNumber;
     private int countEnemy;
 
-    void Start()
-    {
-    }
-
     void Update()
     {
         CountEnemy();
@@ -20,10 +16,14 @@ public class SpawnManager : MonoBehaviour
     private void CountEnemy()
     {
         countEnemy = FindObjectsOfType<Enemy>().Length;
+        // if (countEnemy == 0)
+        // {
+        //     waveNumber++;
+        //     SpawnEnemyWave(waveNumber);
+        // }
         if (countEnemy == 0)
         {
-            waveNumber++;
-            SpawnEnemyWave(waveNumber);
+            SpawnEnemyWave(1);
         }
     }
 
@@ -37,8 +37,8 @@ public class SpawnManager : MonoBehaviour
 
     private Vector3 EnemyPositon()
     {
-        int minBorder = 10;
-        int maxBorder = 24;
+        float minBorder = 2;
+        float maxBorder = 4.5f;
         float rndX = Random.Range(minBorder, maxBorder);
         float rndZ = Random.Range(minBorder, maxBorder);
         float rndXMinus = -Random.Range(minBorder, maxBorder);

@@ -1,4 +1,3 @@
-using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -48,7 +47,7 @@ public class UiManager : MonoBehaviour
     {
         coin = value;
         Debug.Log(coin);
-        //_coinText.text = $"{coin}";
+        _coinText.text = $"{coin}";
     }
 
     public void ChangeCoinValue(int value)

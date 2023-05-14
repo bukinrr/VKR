@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class Enemy : Character
@@ -19,25 +20,26 @@ public class Enemy : Character
 
     void Update()
     {
-        MovementEnemy();
+        //MovementEnemy();
         DestroyEnemy();
         _meleeWeapon.EnemyAttack(player);
     }
+    
 
     protected override void Init()
     {
-        _rigidbody = GetComponent<Rigidbody>();
+        Rigidbody = GetComponent<Rigidbody>();
         _resourceManager = managers.GetComponent<ResourceManager>();
         _meleeWeapon = GetComponent<MeleeWeapon>();
     }
 
-    private void MovementEnemy()
-    {
-        var playerPosition = player.gameObject.transform.position;
-        transform.LookAt(playerPosition);
-        Vector3 direction = (player.transform.position - transform.position).normalized;
-        _rigidbody.AddForceAtPosition(direction * Speed, player.transform.position);
-    }
+    // private void MovementEnemy()
+    // {
+    //     var playerPosition = player.transform.position;
+    //     transform.LookAt(playerPosition);
+    //     Vector3 direction = (playerPosition - transform.position).normalized;
+    //     Rigidbody.AddForceAtPosition(direction * Speed, playerPosition);
+    // }
 
     private void DestroyEnemy()
     {

@@ -1,0 +1,47 @@
+{
+    "name": "root",
+    "metadata": {
+        "timer_format_version": "0.1.0",
+        "start_time_seconds": "1684055869",
+        "python_version": "3.6.13 |Anaconda, Inc.| (default, Mar 16 2021, 11:37:27) [MSC v.1916 64 bit (AMD64)]",
+        "command_line_arguments": "C:\\Users\\Roma\\anaconda3\\envs\\MLAgent\\Scripts\\mlagents-learn EnemyAgent_config.yaml --run-id=EnemyAgentTest --resume",
+        "mlagents_version": "0.28.0",
+        "mlagents_envs_version": "0.28.0",
+        "communication_protocol_version": "1.5.0",
+        "pytorch_version": "1.7.1+cu110",
+        "numpy_version": "1.19.5",
+        "end_time_seconds": "1684055880"
+    },
+    "total": 10.5648543,
+    "count": 1,
+    "self": 0.007240600000001152,
+    "children": {
+        "run_training.setup": {
+            "total": 0.08162309999999999,
+            "count": 1,
+            "self": 0.08162309999999999
+        },
+        "TrainerController.start_learning": {
+            "total": 10.4759906,
+            "count": 1,
+            "self": 0.0004676999999979614,
+            "children": {
+                "TrainerController._reset_env": {
+                    "total": 10.475511800000001,
+                    "count": 1,
+                    "self": 10.475511800000001
+                },
+                "trainer_threads": {
+                    "total": 1.7999999997186933e-06,
+                    "count": 1,
+                    "self": 1.7999999997186933e-06
+                },
+                "TrainerController._save_models": {
+                    "total": 9.300000000322939e-06,
+                    "count": 1,
+                    "self": 9.300000000322939e-06
+                }
+            }
+        }
+    }
+}

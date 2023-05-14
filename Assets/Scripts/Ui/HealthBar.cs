@@ -1,16 +1,38 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class HealthBar : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] private Image healthBarFilling;
+
+    [SerializeField] private Character character;
+
+    private Camera _camera;
+
+    private void Awake()
     {
-        
+        OnHealthChanged(character.GetCurrentHealthAsPercantage());  
+        character.HealthChanged += OnHealthChanged;
+        _camera = Camera.main;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnDestroy()
     {
-        
+        Debug.Log("OnDestroy сработал");
+        character.HealthChanged -= OnHealthChanged;
+    }
+
+    public void OnHealthChanged(float valueAsPercantage)
+    {
+        Debug.Log($"Percantage = {valueAsPercantage}");
+        healthBarFilling.fillAmount = valueAsPercantage;
+    }
+
+    private void LateUpdate()
+    {
+        var cmTrPosition = _camera.transform.position;
+        var direction = new Vector3(transform.position.x, cmTrPosition.y, cmTrPosition.z);
+        transform.LookAt(direction);
+        transform.Rotate(0, 180, 0);
     }
 }

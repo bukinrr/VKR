@@ -1,22 +1,21 @@
 using System;
 using UnityEngine;
-using UnityEngine.PlayerLoop;
 
 public abstract class Character : MonoBehaviour
 {
     [SerializeField] private int health;
-
     [SerializeField] private int maxHealth;
     [SerializeField] private float speed;
     [SerializeField] private float armor;
-    protected Rigidbody _rigidbody;
+    protected Rigidbody Rigidbody;
+    private float _currentHealthAsPercantage;
 
     public event Action<float> HealthChanged;
 
     public int Health
     {
         get => health;
-        private set => health = Mathf.Clamp(value, 0, maxHealth);
+        private set { health = Mathf.Clamp(value, 0, maxHealth); }
     }
 
     public float Armor
@@ -34,8 +33,17 @@ public abstract class Character : MonoBehaviour
     public void GetDamage(object sender, int damage)
     {
         Health -= Mathf.Clamp(damage, 0, 1000);
-        Debug.Log(Health -= Mathf.Clamp(damage, 0, 1000));
-        Debug.Log($"Сущетсво {sender} нанесло урон существу {gameObject} в количестве {damage}");
+        _currentHealthAsPercantage = GetCurrentHealthAsPercantage();
+        Debug.Log(_currentHealthAsPercantage);
+        HealthChanged?.Invoke(_currentHealthAsPercantage);
+        // Debug.Log(Health -= Mathf.Clamp(damage, 0, 1000));
+        // Debug.Log($"Сущетсво {sender} нанесло урон существу {gameObject} в количестве {damage}");
+    }
+
+    public float GetCurrentHealthAsPercantage()
+    {
+        _currentHealthAsPercantage = (float) health / maxHealth;
+        return _currentHealthAsPercantage;
     }
 
     protected abstract void Init();

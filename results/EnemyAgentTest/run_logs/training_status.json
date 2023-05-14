@@ -1,0 +1,38 @@
+{
+    "EnemyAgent": {
+        "checkpoints": [
+            {
+                "steps": 20085,
+                "file_path": "results\\EnemyAgentTest\\EnemyAgent\\EnemyAgent-20085.onnx",
+                "reward": null,
+                "creation_time": 1684050626.201295,
+                "auxillary_file_paths": [
+                    "results\\EnemyAgentTest\\EnemyAgent\\EnemyAgent-20085.pt"
+                ]
+            },
+            {
+                "steps": 88931,
+                "file_path": "results\\EnemyAgentTest\\EnemyAgent\\EnemyAgent-88931.onnx",
+                "reward": null,
+                "creation_time": 1684051633.3605294,
+                "auxillary_file_paths": [
+                    "results\\EnemyAgentTest\\EnemyAgent\\EnemyAgent-88931.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 88931,
+            "file_path": "results\\EnemyAgentTest\\EnemyAgent.onnx",
+            "reward": null,
+            "creation_time": 1684051633.3605294,
+            "auxillary_file_paths": [
+                "results\\EnemyAgentTest\\EnemyAgent\\EnemyAgent-88931.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "0.28.0",
+        "torch_version": "1.7.1+cu110"
+    }
+}

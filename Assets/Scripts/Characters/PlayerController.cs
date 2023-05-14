@@ -2,12 +2,7 @@ using UnityEngine;
 
 public class PlayerController : Character
 {
-    [SerializeField] private GameObject BulletPrefab;
-
     private Transform _target;
-
-    private float _attackTime;
-    private float _lastAttackTime;
 
     private RangeWeapon _rangeWeapon;
 
@@ -24,7 +19,7 @@ public class PlayerController : Character
 
     protected override void Init()
     {
-        _rigidbody = GetComponent<Rigidbody>();
+        Rigidbody = GetComponent<Rigidbody>();
         _rangeWeapon = GetComponentInChildren<RangeWeapon>();
     }
 
