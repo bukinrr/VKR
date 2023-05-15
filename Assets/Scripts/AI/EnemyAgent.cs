@@ -47,10 +47,16 @@ public class EnemyAgent : Agent
         _rigidbody.MoveRotation(targetRotation);
 
         float distanceToTarget = Vector3.Distance(transform.localPosition, target.localPosition);
+        if (distanceToTarget <= 15f)
+        {
+            var reward = 0.000001f * 15f - distanceToTarget;
+            AddReward(reward);
+        }
+
         if (distanceToTarget < 1f)
         {
             Debug.Log("Подошел к 1");
-            AddReward(0.2f);
+            AddReward(0.5f);
             EndEpisode();
         }
         else if (distanceToTarget >=30)

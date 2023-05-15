@@ -6,7 +6,8 @@ public class UiManager : MonoBehaviour
 {
     //[SerializeField] private GameObject coinText;
 
-    [SerializeField] private TMP_Text _coinText;
+    [SerializeField] private TMP_Text coinTMPText;
+    [SerializeField] private Text coinText;
     private int coin;
 
     [SerializeField] private Image timerBar;
@@ -20,13 +21,12 @@ public class UiManager : MonoBehaviour
 
     private void Awake()
     {
-        //_coinText = coinText.GetComponent<TMP_Text>();
     }
 
     private void Update()
     {
         TimerRound();
-        _coinText.text = $"{coin}";
+        coinTMPText.text = $"{coin}";
         //ChangeCoin(coin);
     }
 
@@ -47,14 +47,14 @@ public class UiManager : MonoBehaviour
     {
         coin = value;
         Debug.Log(coin);
-        _coinText.text = $"{coin}";
+        coinTMPText.text = $"{coin}";
     }
 
     public void ChangeCoinValue(int value)
     {
         Debug.Log("Метод ChangeCoinValue выполнен");
-        _coinText.text = value.ToString();
-        // if (_coinText != null)
+        coinTMPText.text = value.ToString();
+        // if (_coinTMPText != null)
         // {
         //     
         // }   

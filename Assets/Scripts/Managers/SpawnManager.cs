@@ -37,8 +37,8 @@ public class SpawnManager : MonoBehaviour
 
     private Vector3 EnemyPositon()
     {
-        float minBorder = 2;
-        float maxBorder = 4.5f;
+        float minBorder = 15;
+        float maxBorder = 24f;
         float rndX = Random.Range(minBorder, maxBorder);
         float rndZ = Random.Range(minBorder, maxBorder);
         float rndXMinus = -Random.Range(minBorder, maxBorder);

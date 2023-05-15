@@ -76,6 +76,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _coinText: {fileID: 0}
+  timerBar: {fileID: 0}
+  matTime: 0
 --- !u!114 &491929191901229934
 MonoBehaviour:
   m_ObjectHideFlags: 0

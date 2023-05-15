@@ -22,7 +22,7 @@ public class Enemy : Character
     {
         //MovementEnemy();
         DestroyEnemy();
-        _meleeWeapon.EnemyAttack(player);
+        //_meleeWeapon.EnemyAttack(player);
     }
     
 
