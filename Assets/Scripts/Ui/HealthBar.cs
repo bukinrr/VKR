@@ -11,7 +11,7 @@ public class HealthBar : MonoBehaviour
 
     private void Awake()
     {
-        OnHealthChanged(character.GetCurrentHealthAsPercantage());  
+        OnHealthChanged(character.GetCurrentHealthAsPercentage());  
         character.HealthChanged += OnHealthChanged;
         _camera = Camera.main;
     }

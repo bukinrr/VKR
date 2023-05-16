@@ -3,8 +3,8 @@ using UnityEngine;
 
 public abstract class Character : MonoBehaviour
 {
-    [SerializeField] private int health;
-    [SerializeField] private int maxHealth;
+    [SerializeField] private float health;
+    [SerializeField] private float maxHealth;
     [SerializeField] private float speed;
     [SerializeField] private float armor;
     protected Rigidbody Rigidbody;
@@ -12,10 +12,10 @@ public abstract class Character : MonoBehaviour
 
     public event Action<float> HealthChanged;
 
-    public int Health
+    public float Health
     {
         get => health;
-        private set { health = Mathf.Clamp(value, 0, maxHealth); }
+        protected set => health = Mathf.Clamp(value, 0, maxHealth);
     }
 
     public float Armor
@@ -30,47 +30,51 @@ public abstract class Character : MonoBehaviour
         protected set => speed = Mathf.Clamp(value, 0, 1700);
     }
 
-    public void GetDamage(object sender, int damage)
+    public void GetDamage(object sender, float damage)
     {
         Health -= damage;
-        _currentHealthAsPercentage = GetCurrentHealthAsPercantage();
+        _currentHealthAsPercentage = GetCurrentHealthAsPercentage();
         HealthChanged?.Invoke(_currentHealthAsPercentage);
     }
 
-    public float GetCurrentHealthAsPercantage()
+    public float GetCurrentHealthAsPercentage()
     {
-        _currentHealthAsPercentage = (float) health / maxHealth;
-        return _currentHealthAsPercentage;
+        return health / maxHealth;
     }
 
     protected abstract void Init();
 
-    public void IncreaseHealth(object sender, int amount)
+    public void IncreaseCurrentHealth(object sender, float amount)
     {
         Health += amount;
     }
 
-    public void ReduceHealth(object sender, int amount)
+    public void IncreaseMaxHealth(object sender, float amount)
+    {
+        maxHealth += Mathf.Clamp(amount, 0, 200);
+    }
+
+    public void ReduceHealth(object sender, float amount)
     {
         Health -= amount;
     }
 
-    public void IncreaseSpeed(object sender, int amount)
+    public void IncreaseSpeed(object sender, float amount)
     {
         Speed += amount;
     }
 
-    public void ReduceSpeed(object sender, int amount)
+    public void ReduceSpeed(object sender, float amount)
     {
         Speed -= amount;
     }
 
-    public void IncreaseArmor(object sender, int amount)
+    public void IncreaseArmor(object sender, float amount)
     {
         Armor += amount;
     }
 
-    public void ReduceArmor(object sender, int amount)
+    public void ReduceArmor(object sender, float amount)
     {
         Armor -= amount;
     }
