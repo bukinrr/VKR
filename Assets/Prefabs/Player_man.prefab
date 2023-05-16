@@ -253,7 +253,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 173a1fa20b14f4e449c877680f38510d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  boostAtackSpeed: 30
+  boostAtackSpeed: 60
   damage: 1
   bulletPrefab: {fileID: 2088339637601007142, guid: cd5553715871aaa41b215f4bb6f90d4d, type: 3}
   attackRange: 100
@@ -730,8 +730,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4cfba7fc5e78b545b3fa863b0ab2e65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 6
-  maxHealth: 9
+  health: 10
+  maxHealth: 15
   speed: 0
   armor: 2
 --- !u!136 &7391963688191660000

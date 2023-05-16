@@ -1,11 +1,12 @@
 using System;
+using System.Collections;
 using UnityEngine;
 
 public class MeleeWeapon : Weapon
 {
-    [SerializeField] private float attackRange = 2f;
-    [SerializeField] private float lastAttackTime;
-    private float _attackTime;
+    [SerializeField] private float attackRange;
+    private bool _canAttack = true;
+    private WaitForSeconds _attackTime;
 
     private void Awake()
     {
@@ -19,7 +20,7 @@ public class MeleeWeapon : Weapon
 
     protected override void Init()
     {
-        _attackTime = GetTotalAttackSpeed();
+        _attackTime = new WaitForSeconds(GetTotalAttackSpeed());
     }
 
     protected override GameObject FindTarget()
@@ -31,28 +32,31 @@ public class MeleeWeapon : Weapon
     {
         if (CanAttack(target))
         {
-            Attack(target);
+            StartCoroutine(IECanAttack(target));
         }
     }
 
     protected override bool CanAttack(GameObject target)
     {
         float distance = Vector3.Distance(transform.position, target.transform.position);
-        if (distance <= attackRange && Time.time - lastAttackTime >= _attackTime)
-        {
-            lastAttackTime = Time.time;
+        if (_canAttack && distance <= attackRange)
             return true;
-        }
-        else
-        {
-            return false;
-        }
+
+        return false;
+    }
+
+    private IEnumerator IECanAttack(GameObject target)
+    {
+        Attack(target);
+        _canAttack = false;
+        Debug.Log("Атака");
+        yield return _attackTime;
+        _canAttack = true;
     }
 
     private void Attack(GameObject target)
     {
-        var _playerController = target.GetComponent<PlayerController>();
-        _playerController.GetDamage(this, Damage);
-        Debug.Log($"Enemy наносит урон существу{target.gameObject.name}, у него осталось {_playerController.Health}");
+        var playerController = target.GetComponent<PlayerController>();
+        playerController.GetDamage(this, Damage);
     }
 }

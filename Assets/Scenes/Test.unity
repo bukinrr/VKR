@@ -7523,6 +7523,10 @@ PrefabInstance:
       propertyPath: _enemy
       value: 
       objectReference: {fileID: 1787680487}
+    - target: {fileID: 7079845414173783470, guid: 97356985f40a74a4ab7674c2b717bdfd, type: 3}
+      propertyPath: health
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 7079845415102053758, guid: 97356985f40a74a4ab7674c2b717bdfd, type: 3}
       propertyPath: m_TagString
       value: Player

@@ -1189,8 +1189,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b4f08fc626c1d84ba230b9201440a48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 777
-  maxHealth: 10
+  health: 5
+  maxHealth: 100
   speed: 600
   armor: 2
   player: {fileID: 7391963687937132337, guid: 8bb4a8b47b53ebe479492bf789886309, type: 3}
@@ -1203,15 +1203,14 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7073605011081292982}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2e70ef6f7cd428042a33b69b99ffd732, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  boostAtackSpeed: 0
+  boostAtackSpeed: 10
   damage: 1
-  attackRange: 1.5
-  lastAttackTime: 0
+  attackRange: 2
 --- !u!114 &2884107789069844244
 MonoBehaviour:
   m_ObjectHideFlags: 0

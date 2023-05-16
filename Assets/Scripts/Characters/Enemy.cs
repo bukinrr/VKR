@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 public class Enemy : Character
@@ -9,7 +8,6 @@ public class Enemy : Character
     private ResourceManager _resourceManager;
 
     private MeleeWeapon _meleeWeapon;
-    private float _attackTime;
 
     [SerializeField] private int coinPerDeath;
 
@@ -20,9 +18,8 @@ public class Enemy : Character
 
     void Update()
     {
-        //MovementEnemy();
         DestroyEnemy();
-        //_meleeWeapon.EnemyAttack(player);
+        _meleeWeapon.EnemyAttack(player);
     }
     
 
@@ -32,14 +29,6 @@ public class Enemy : Character
         _resourceManager = managers.GetComponent<ResourceManager>();
         _meleeWeapon = GetComponent<MeleeWeapon>();
     }
-
-    // private void MovementEnemy()
-    // {
-    //     var playerPosition = player.transform.position;
-    //     transform.LookAt(playerPosition);
-    //     Vector3 direction = (playerPosition - transform.position).normalized;
-    //     Rigidbody.AddForceAtPosition(direction * Speed, playerPosition);
-    // }
 
     private void DestroyEnemy()
     {

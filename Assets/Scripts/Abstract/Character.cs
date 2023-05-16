@@ -8,7 +8,7 @@ public abstract class Character : MonoBehaviour
     [SerializeField] private float speed;
     [SerializeField] private float armor;
     protected Rigidbody Rigidbody;
-    private float _currentHealthAsPercantage;
+    private float _currentHealthAsPercentage;
 
     public event Action<float> HealthChanged;
 
@@ -32,18 +32,15 @@ public abstract class Character : MonoBehaviour
 
     public void GetDamage(object sender, int damage)
     {
-        Health -= Mathf.Clamp(damage, 0, 1000);
-        _currentHealthAsPercantage = GetCurrentHealthAsPercantage();
-        Debug.Log(_currentHealthAsPercantage);
-        HealthChanged?.Invoke(_currentHealthAsPercantage);
-        // Debug.Log(Health -= Mathf.Clamp(damage, 0, 1000));
-        // Debug.Log($"Сущетсво {sender} нанесло урон существу {gameObject} в количестве {damage}");
+        Health -= damage;
+        _currentHealthAsPercentage = GetCurrentHealthAsPercantage();
+        HealthChanged?.Invoke(_currentHealthAsPercentage);
     }
 
     public float GetCurrentHealthAsPercantage()
     {
-        _currentHealthAsPercantage = (float) health / maxHealth;
-        return _currentHealthAsPercantage;
+        _currentHealthAsPercentage = (float) health / maxHealth;
+        return _currentHealthAsPercentage;
     }
 
     protected abstract void Init();

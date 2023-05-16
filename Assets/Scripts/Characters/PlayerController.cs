@@ -13,8 +13,8 @@ public class PlayerController : Character
 
     void Update()
     {
-        _rangeWeapon.LaunchShoot();
         DestroyPlayer();
+        _rangeWeapon.LaunchShoot();
     }
 
     protected override void Init()
@@ -27,7 +27,7 @@ public class PlayerController : Character
     {
         if (Health <= 0)
         {
-            Debug.Log("Объект должен быть уничтожен");
+            Debug.Log("У игрока 0 хп");
             Destroy(gameObject);
         }
     }

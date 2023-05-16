@@ -55,7 +55,7 @@ public class EnemyAgent : Agent
 
         if (distanceToTarget < 1f)
         {
-            Debug.Log("Подошел к 1");
+            //Debug.Log("Подошел к 1");
             AddReward(0.5f);
             EndEpisode();
         }
