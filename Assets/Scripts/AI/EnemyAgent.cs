@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using Unity.MLAgents;
 using Random = UnityEngine.Random;
@@ -8,6 +9,11 @@ public class EnemyAgent : Agent
 {
     private Enemy _enemy;
     private Rigidbody _rigidbody;
+    [SerializeField] private Transform targetTransform;
+
+    private Vector3 _startPosition;
+
+    //private Quaternion _targetRotation;
     [SerializeField] private float speed;
 
     private void Start()
@@ -15,9 +21,9 @@ public class EnemyAgent : Agent
         _enemy = GetComponent<Enemy>();
         speed = _enemy.Speed;
         _rigidbody = GetComponent<Rigidbody>();
+        //_targetRotation = Quaternion.identity;
+        _startPosition = transform.localPosition;
     }
-
-    public Transform target;
 
     // public override void OnEpisodeBegin()
     // {
@@ -29,7 +35,7 @@ public class EnemyAgent : Agent
 
     public override void CollectObservations(VectorSensor sensor)
     {
-        sensor.AddObservation(target.localPosition);
+        sensor.AddObservation(targetTransform.localPosition);
         sensor.AddObservation(transform.localPosition);
         sensor.AddObservation(_rigidbody.velocity.x);
         sensor.AddObservation(_rigidbody.velocity.z);
@@ -37,32 +43,39 @@ public class EnemyAgent : Agent
 
     public override void OnActionReceived(ActionBuffers actions)
     {
-        Vector3 controlSignal = Vector3.zero;
-        controlSignal.x = actions.ContinuousActions[0];
-        controlSignal.z = actions.ContinuousActions[1];
+        Vector3 movementSignal = Vector3.zero;
+        movementSignal.x = actions.ContinuousActions[0];
+        movementSignal.z = actions.ContinuousActions[1];
 
-        Quaternion targetRotation = Quaternion.LookRotation(controlSignal);
+        Quaternion targetRotation = Quaternion.LookRotation(movementSignal);
         targetRotation = Quaternion.RotateTowards(transform.rotation, targetRotation, 360 * Time.deltaTime);
-        _rigidbody.AddForce(controlSignal * speed * Time.deltaTime);
+        
+        
+
+        _rigidbody.AddForce(movementSignal * speed * Time.deltaTime);
         _rigidbody.MoveRotation(targetRotation);
 
-        float distanceToTarget = Vector3.Distance(transform.localPosition, target.localPosition);
-        if (distanceToTarget <= 15f)
+
+        float distanceToTarget = Vector3.Distance(transform.localPosition, targetTransform.localPosition);
+        float previousDistance = Vector3.Distance(_startPosition, targetTransform.localPosition);
+        if (distanceToTarget < previousDistance)
         {
-            var reward = 0.000001f * 15f - distanceToTarget;
+            var reward = 0.00001f;
             AddReward(reward);
         }
+        else
+        {
+            AddReward(-0.001f);
+        }
 
-        if (distanceToTarget < 1f)
+        if (distanceToTarget < 3.6f)
         {
             //Debug.Log("Подошел к 1");
-            AddReward(0.5f);
-            EndEpisode();
+            AddReward(2f);
         }
-        else if (distanceToTarget >=30)
+        else if (distanceToTarget >= 22)
         {
-            AddReward(-0.01f);
-            EndEpisode();
+            AddReward(-1f);
         }
     }
 
@@ -80,11 +93,22 @@ public class EnemyAgent : Agent
     {
         if (other.CompareTag("Wall"))
         {
-            AddReward(-0.03f);
+            AddReward(-0.05f);
         }
-        else if (other.CompareTag("Bullet"))
+
+        // if (other.CompareTag("Bullet"))
+        // {
+        //     AddReward(-0.03f);
+        // }
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.CompareTag("Wall"))
         {
-            AddReward(-0.01f);
+            SetReward(-100f);
+            Debug.Log("Стоит у стены");
+            Destroy(gameObject);
         }
     }
 }

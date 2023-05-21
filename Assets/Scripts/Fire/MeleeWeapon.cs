@@ -8,6 +8,8 @@ public class MeleeWeapon : Weapon
     private bool _canAttack = true;
     private WaitForSeconds _attackTime;
 
+    private Animator _animator;
+
     private void Awake()
     {
         AttackType = RangeType.Melee;
@@ -21,6 +23,7 @@ public class MeleeWeapon : Weapon
     protected override void Init()
     {
         _attackTime = new WaitForSeconds(GetTotalAttackSpeed());
+        _animator = GetComponent<Animator>();
     }
 
     protected override GameObject FindTarget()
@@ -52,11 +55,13 @@ public class MeleeWeapon : Weapon
         Debug.Log("Атака");
         yield return _attackTime;
         _canAttack = true;
+        _animator.SetBool("AttackBool", false);
     }
 
     private void Attack(GameObject target)
     {
         var playerController = target.GetComponent<PlayerController>();
         playerController.GetDamage(this, Damage);
+        _animator.SetBool("AttackBool", true);
     }
 }

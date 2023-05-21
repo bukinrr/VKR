@@ -1,0 +1,65 @@
+{
+    "EnemyAgent": {
+        "checkpoints": [
+            {
+                "steps": 30549,
+                "file_path": "results\\VKRTest\\EnemyAgent\\EnemyAgent-30549.onnx",
+                "reward": null,
+                "creation_time": 1684663653.015613,
+                "auxillary_file_paths": [
+                    "results\\VKRTest\\EnemyAgent\\EnemyAgent-30549.pt"
+                ]
+            },
+            {
+                "steps": 31558,
+                "file_path": "results\\VKRTest\\EnemyAgent\\EnemyAgent-31558.onnx",
+                "reward": null,
+                "creation_time": 1684664306.3835611,
+                "auxillary_file_paths": [
+                    "results\\VKRTest\\EnemyAgent\\EnemyAgent-31558.pt"
+                ]
+            },
+            {
+                "steps": 31705,
+                "file_path": "results\\VKRTest\\EnemyAgent\\EnemyAgent-31705.onnx",
+                "reward": null,
+                "creation_time": 1684664330.99578,
+                "auxillary_file_paths": [
+                    "results\\VKRTest\\EnemyAgent\\EnemyAgent-31705.pt"
+                ]
+            },
+            {
+                "steps": 31833,
+                "file_path": "results\\VKRTest\\EnemyAgent\\EnemyAgent-31833.onnx",
+                "reward": null,
+                "creation_time": 1684664377.5398319,
+                "auxillary_file_paths": [
+                    "results\\VKRTest\\EnemyAgent\\EnemyAgent-31833.pt"
+                ]
+            },
+            {
+                "steps": 31942,
+                "file_path": "results\\VKRTest\\EnemyAgent\\EnemyAgent-31942.onnx",
+                "reward": null,
+                "creation_time": 1684664560.924111,
+                "auxillary_file_paths": [
+                    "results\\VKRTest\\EnemyAgent\\EnemyAgent-31942.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 31942,
+            "file_path": "results\\VKRTest\\EnemyAgent.onnx",
+            "reward": null,
+            "creation_time": 1684664560.924111,
+            "auxillary_file_paths": [
+                "results\\VKRTest\\EnemyAgent\\EnemyAgent-31942.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "0.28.0",
+        "torch_version": "1.7.1+cu110"
+    }
+}

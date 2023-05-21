@@ -1,0 +1,56 @@
+{
+    "EnemyAgent": {
+        "checkpoints": [
+            {
+                "steps": 1053,
+                "file_path": "results\\VKRBrain100\\EnemyAgent\\EnemyAgent-1053.onnx",
+                "reward": null,
+                "creation_time": 1684690677.9464455,
+                "auxillary_file_paths": [
+                    "results\\VKRBrain100\\EnemyAgent\\EnemyAgent-1053.pt"
+                ]
+            },
+            {
+                "steps": 4355,
+                "file_path": "results\\VKRBrain100\\EnemyAgent\\EnemyAgent-4355.onnx",
+                "reward": null,
+                "creation_time": 1684690751.800071,
+                "auxillary_file_paths": [
+                    "results\\VKRBrain100\\EnemyAgent\\EnemyAgent-4355.pt"
+                ]
+            },
+            {
+                "steps": 27968,
+                "file_path": "results\\VKRBrain100\\EnemyAgent\\EnemyAgent-27968.onnx",
+                "reward": null,
+                "creation_time": 1684691258.7827585,
+                "auxillary_file_paths": [
+                    "results\\VKRBrain100\\EnemyAgent\\EnemyAgent-27968.pt"
+                ]
+            },
+            {
+                "steps": 30285,
+                "file_path": "results\\VKRBrain100\\EnemyAgent\\EnemyAgent-30285.onnx",
+                "reward": null,
+                "creation_time": 1684691397.9106512,
+                "auxillary_file_paths": [
+                    "results\\VKRBrain100\\EnemyAgent\\EnemyAgent-30285.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 30285,
+            "file_path": "results\\VKRBrain100\\EnemyAgent.onnx",
+            "reward": null,
+            "creation_time": 1684691397.9106512,
+            "auxillary_file_paths": [
+                "results\\VKRBrain100\\EnemyAgent\\EnemyAgent-30285.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "0.28.0",
+        "torch_version": "1.7.1+cu110"
+    }
+}

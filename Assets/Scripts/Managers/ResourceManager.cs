@@ -3,7 +3,7 @@ using UnityEngine;
 public class ResourceManager : MonoBehaviour
 {
     private int _coin;
-    [SerializeField] private UiManager uiManager;
+    private UiManager uiManager;
 
     public int Coin
     {
@@ -17,6 +17,7 @@ public class ResourceManager : MonoBehaviour
 
     private void Awake()
     {
+        uiManager = gameObject.GetComponent<UiManager>();
         if (uiManager != null)
         {
             OnCoinChange += uiManager.ChangeCoinValue;
@@ -29,9 +30,9 @@ public class ResourceManager : MonoBehaviour
 
     public void AddCoins(int coinsValue)
     {
-        // _coin += coinsValue;
+        //_coin += coinsValue;
         // uiManager.ChangeCoin(_coin);
-        Debug.Log($"coins = {_coin}");
+        //Debug.Log($"coins = {_coin}");
          if (OnCoinChange == null)
          {
              Debug.Log("Пожрал говна");

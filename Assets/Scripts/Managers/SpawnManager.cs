@@ -4,7 +4,7 @@ public class SpawnManager : MonoBehaviour
 {
     [Header("Список врагов")] [SerializeField]
     private GameObject[] arrayEnemy;
-
+    
     private int waveNumber;
     private int countEnemy;
 
@@ -38,7 +38,7 @@ public class SpawnManager : MonoBehaviour
     private Vector3 EnemyPositon()
     {
         float minBorder = 15;
-        float maxBorder = 24f;
+        float maxBorder = 21f;
         float rndX = Random.Range(minBorder, maxBorder);
         float rndZ = Random.Range(minBorder, maxBorder);
         float rndXMinus = -Random.Range(minBorder, maxBorder);

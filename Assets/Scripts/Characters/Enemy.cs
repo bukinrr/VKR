@@ -6,7 +6,6 @@ public class Enemy : Character
 
     [SerializeField] private GameObject managers;
     private ResourceManager _resourceManager;
-
     private MeleeWeapon _meleeWeapon;
 
     [SerializeField] private int coinPerDeath;

@@ -1,0 +1,47 @@
+{
+    "EnemyAgent": {
+        "checkpoints": [
+            {
+                "steps": 3282,
+                "file_path": "results\\VKRTest3\\EnemyAgent\\EnemyAgent-3282.onnx",
+                "reward": null,
+                "creation_time": 1684669138.7031748,
+                "auxillary_file_paths": [
+                    "results\\VKRTest3\\EnemyAgent\\EnemyAgent-3282.pt"
+                ]
+            },
+            {
+                "steps": 8368,
+                "file_path": "results\\VKRTest3\\EnemyAgent\\EnemyAgent-8368.onnx",
+                "reward": null,
+                "creation_time": 1684669588.450651,
+                "auxillary_file_paths": [
+                    "results\\VKRTest3\\EnemyAgent\\EnemyAgent-8368.pt"
+                ]
+            },
+            {
+                "steps": 14678,
+                "file_path": "results\\VKRTest3\\EnemyAgent\\EnemyAgent-14678.onnx",
+                "reward": null,
+                "creation_time": 1684669963.2574484,
+                "auxillary_file_paths": [
+                    "results\\VKRTest3\\EnemyAgent\\EnemyAgent-14678.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 14678,
+            "file_path": "results\\VKRTest3\\EnemyAgent.onnx",
+            "reward": null,
+            "creation_time": 1684669963.2574484,
+            "auxillary_file_paths": [
+                "results\\VKRTest3\\EnemyAgent\\EnemyAgent-14678.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "0.28.0",
+        "torch_version": "1.7.1+cu110"
+    }
+}

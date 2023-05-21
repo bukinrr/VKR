@@ -15,7 +15,7 @@ public abstract class Weapon : MonoBehaviour
     private const float NormalAttackSpeed = 100f;
     private const float AttackSpeedCoefficient = 0.01f;
 
-    [SerializeField] private int damage;
+    [SerializeField] private float damage;
     protected RangeType AttackType = RangeType.None;
 
     public float AttackSpeed
@@ -24,7 +24,7 @@ public abstract class Weapon : MonoBehaviour
         protected set => boostAtackSpeed = Mathf.Clamp(value, -80, 600);
     }
 
-    public int Damage
+    public float Damage
     {
         get => damage;
         private set => damage = Mathf.Clamp(value, 0, Int32.MaxValue);

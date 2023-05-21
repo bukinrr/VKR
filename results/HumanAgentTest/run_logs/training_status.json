@@ -7,15 +7,6 @@
     "EnemyAgent": {
         "checkpoints": [
             {
-                "steps": 3900,
-                "file_path": "results\\HumanAgentTest\\EnemyAgent\\EnemyAgent-3900.onnx",
-                "reward": null,
-                "creation_time": 1684067734.4645996,
-                "auxillary_file_paths": [
-                    "results\\HumanAgentTest\\EnemyAgent\\EnemyAgent-3900.pt"
-                ]
-            },
-            {
                 "steps": 6193,
                 "file_path": "results\\HumanAgentTest\\EnemyAgent\\EnemyAgent-6193.onnx",
                 "reward": 0.0,
@@ -50,15 +41,24 @@
                 "auxillary_file_paths": [
                     "results\\HumanAgentTest\\EnemyAgent\\EnemyAgent-156086.pt"
                 ]
+            },
+            {
+                "steps": 168964,
+                "file_path": "results\\HumanAgentTest\\EnemyAgent\\EnemyAgent-168964.onnx",
+                "reward": null,
+                "creation_time": 1684700687.8882084,
+                "auxillary_file_paths": [
+                    "results\\HumanAgentTest\\EnemyAgent\\EnemyAgent-168964.pt"
+                ]
             }
         ],
         "final_checkpoint": {
-            "steps": 156086,
+            "steps": 168964,
             "file_path": "results\\HumanAgentTest\\EnemyAgent.onnx",
             "reward": null,
-            "creation_time": 1684070642.5310018,
+            "creation_time": 1684700687.8882084,
             "auxillary_file_paths": [
-                "results\\HumanAgentTest\\EnemyAgent\\EnemyAgent-156086.pt"
+                "results\\HumanAgentTest\\EnemyAgent\\EnemyAgent-168964.pt"
             ]
         }
     }

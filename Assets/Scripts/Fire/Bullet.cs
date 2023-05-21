@@ -5,11 +5,11 @@ public class Bullet : MonoBehaviour
     [SerializeField] private float speedBullet;
     [SerializeField] public float maxDistance;
 
-    private int _damage;
+    private float _damage;
 
     private float distanceTraveled = 0f;
 
-    public void Launch(int damage)
+    public void Launch(float damage)
     {
         _damage = damage;
         GetComponent<Rigidbody>().velocity = transform.forward * speedBullet;

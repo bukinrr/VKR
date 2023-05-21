@@ -1,0 +1,49 @@
+{
+    "name": "root",
+    "metadata": {
+        "timer_format_version": "0.1.0",
+        "start_time_seconds": "1684698318",
+        "python_version": "3.6.13 |Anaconda, Inc.| (default, Mar 16 2021, 11:37:27) [MSC v.1916 64 bit (AMD64)]",
+        "command_line_arguments": "C:\\Users\\Roma\\anaconda3\\envs\\MLAgent\\Scripts\\mlagents-learn EnemyAgent_config.yaml --run-id=VKRBrain77 --resume",
+        "mlagents_version": "0.28.0",
+        "mlagents_envs_version": "0.28.0",
+        "communication_protocol_version": "1.5.0",
+        "pytorch_version": "1.7.1+cu110",
+        "numpy_version": "1.19.5",
+        "end_time_seconds": "1684698334"
+    },
+    "total": 15.530602499999999,
+    "count": 1,
+    "self": 0.011214599999998853,
+    "children": {
+        "run_training.setup": {
+            "total": 0.0764625,
+            "count": 1,
+            "self": 0.0764625
+        },
+        "TrainerController.start_learning": {
+            "total": 15.4429254,
+            "count": 1,
+            "self": 8.19999999990273e-05,
+            "children": {
+                "TrainerController._reset_env": {
+                    "total": 13.0605547,
+                    "count": 1,
+                    "self": 13.0605547
+                },
+                "TrainerController._save_models": {
+                    "total": 2.3822887,
+                    "count": 1,
+                    "self": 0.016629099999999397,
+                    "children": {
+                        "RLTrainer._checkpoint": {
+                            "total": 2.3656596000000008,
+                            "count": 1,
+                            "self": 2.3656596000000008
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
