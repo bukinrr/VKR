@@ -30,9 +30,9 @@ public class Bullet : MonoBehaviour
         if (collision.transform.CompareTag("Enemy"))
         {
             Enemy targetEnemyComponent = collision.gameObject.GetComponent<Enemy>();
-            Debug.Log($"Хп до удара {targetEnemyComponent.Health}");
+            //Debug.Log($"Хп до удара {targetEnemyComponent.Health}");
             targetEnemyComponent.GetDamage(this, _damage);
-            Debug.Log($"Хп после удара {targetEnemyComponent.Health}");
+            //Debug.Log($"Хп после удара {targetEnemyComponent.Health}");
             Destroy(gameObject);
         }
     }

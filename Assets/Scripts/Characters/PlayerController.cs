@@ -2,8 +2,6 @@ using UnityEngine;
 
 public class PlayerController : Character
 {
-    private Transform _target;
-
     private RangeWeapon _rangeWeapon;
 
     void Start()
@@ -23,12 +21,9 @@ public class PlayerController : Character
         _rangeWeapon = GetComponentInChildren<RangeWeapon>();
     }
 
-    protected void DestroyPlayer()
+    private void DestroyPlayer()
     {
         if (Health <= 0)
-        {
-            Debug.Log("У игрока 0 хп");
             Destroy(gameObject);
-        }
     }
 }

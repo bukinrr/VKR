@@ -257,7 +257,8 @@ MonoBehaviour:
   damage: 1
   bulletPrefab: {fileID: 2088339637601007142, guid: cd5553715871aaa41b215f4bb6f90d4d, type: 3}
   attackRange: 100
-  countBullet: 100
+  maxCountBulletInMagazine: 12
+  maxMaxCountBullet: 0
   RangeFireMode: 1
   bulletSpawnPoint: {fileID: 5619706707247122285}
   reloadTime: 2

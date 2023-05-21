@@ -30,6 +30,17 @@ public abstract class Weapon : MonoBehaviour
         private set => damage = Mathf.Clamp(value, 0, Int32.MaxValue);
     }
 
+    protected float GetTotalAttackSpeed()
+    {
+        var attackPerSecond = (NormalAttackSpeed + boostAtackSpeed) * AttackSpeedCoefficient / BaseAttackTime;
+        var attackTime = 1 / attackPerSecond;
+        return attackTime;
+    }
+
+    protected abstract void Init();
+    protected abstract GameObject FindTarget();
+    protected abstract bool CanAttack(GameObject target);
+
     public void IncreaseAttackSpeed(object sender, int amount)
     {
         AttackSpeed -= amount;
@@ -49,15 +60,4 @@ public abstract class Weapon : MonoBehaviour
     {
         Damage -= amount;
     }
-
-    protected float GetTotalAttackSpeed()
-    {
-        var attackPerSecond = (NormalAttackSpeed + boostAtackSpeed) * AttackSpeedCoefficient / BaseAttackTime;
-        var attackTime = 1 / attackPerSecond;
-        return attackTime;
-    }
-
-    protected abstract void Init();
-    protected abstract GameObject FindTarget();
-    protected abstract bool CanAttack(GameObject target);
 }

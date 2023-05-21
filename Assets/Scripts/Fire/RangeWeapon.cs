@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class RangeWeapon : Weapon
@@ -12,21 +13,23 @@ public class RangeWeapon : Weapon
 
     [SerializeField] private GameObject bulletPrefab;
     [SerializeField] private float attackRange;
-    [SerializeField] private int countBullet;
+    [SerializeField] private float reloadTime;
+    [SerializeField] private int maxCountBulletInMagazine;
+    [SerializeField] private int maxMaxCountBullet;
     [SerializeField] protected FireMode RangeFireMode;
     [SerializeField] private Transform bulletSpawnPoint;
 
-    private int _currentAmmo;
-    public float reloadTime = 2f;
+    private int _currentAmmoInMagazine;
 
     private float _attackTime;
     private float _lastAttackTime;
+    private bool _reload = false;
 
 
-    private int CountBullet
+    private int MaxCountBullet
     {
-        get => countBullet;
-        set => countBullet = Mathf.Clamp(value, 0, 500);
+        get => maxMaxCountBullet;
+        set => maxMaxCountBullet = Mathf.Clamp(value, 0, 500);
     }
 
     private void Start()
@@ -38,6 +41,7 @@ public class RangeWeapon : Weapon
     {
         AttackType = RangeType.Range;
         _attackTime = GetTotalAttackSpeed();
+        _currentAmmoInMagazine = maxCountBulletInMagazine;
     }
 
     public void LaunchShoot()
@@ -46,17 +50,18 @@ public class RangeWeapon : Weapon
         Shoot(target);
     }
 
+
     protected override GameObject FindTarget()
     {
         //Первый кто попадет в радиус(не обязательно ближаший к игроку)
         Collider[] hitColliders = Physics.OverlapSphere(transform.position, attackRange);
-        
+
         foreach (var hitCollider in hitColliders)
         {
             if (hitCollider.CompareTag("Enemy"))
                 return hitCollider.gameObject;
         }
-        
+
         return null;
 
         //ПОИСК БЛИЖАЙШЕГО
@@ -79,21 +84,21 @@ public class RangeWeapon : Weapon
         //     }
         // }
         //
-        // Debug.Log(closestEnemy);
         // return closestEnemy;
     }
 
     protected override bool CanAttack(GameObject target)
     {
-        return bulletPrefab && bulletSpawnPoint && target &&
-               Time.time - _lastAttackTime >= _attackTime;
+        var elapsedTime = (Time.time - _lastAttackTime) >= _attackTime;
+        return bulletPrefab && bulletSpawnPoint && target && elapsedTime
+               && _currentAmmoInMagazine > 0 && _reload == false;
     }
 
     protected void Shoot(GameObject target)
     {
+        CanReload();
         if (CanAttack(target))
         {
-            Debug.Log("ВЫСТРЕЛ");
             _lastAttackTime = Time.time;
             Vector3 direction = (target.transform.position + Vector3.up - bulletSpawnPoint.position).normalized;
 
@@ -105,10 +110,24 @@ public class RangeWeapon : Weapon
             bullet.transform.forward = direction;
 
             bullet.GetComponent<Bullet>().Launch(Damage);
+            _currentAmmoInMagazine -= 1;
         }
     }
 
-    protected void Reload()
+    protected void CanReload()
     {
+        if (_currentAmmoInMagazine <= 0)
+            StartCoroutine(ReloadMagazine());
+    }
+
+    private IEnumerator ReloadMagazine()
+    {
+        if (_currentAmmoInMagazine >= maxCountBulletInMagazine)
+            yield break;
+
+        _reload = true;
+        _currentAmmoInMagazine += maxCountBulletInMagazine;
+        yield return new WaitForSeconds(reloadTime);
+        _reload = false;
     }
 }
