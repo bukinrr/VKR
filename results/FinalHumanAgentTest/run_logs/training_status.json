@@ -2,24 +2,6 @@
     "EnemyAgent": {
         "checkpoints": [
             {
-                "steps": 29165,
-                "file_path": "results\\FinalHumanAgentTest\\EnemyAgent\\EnemyAgent-29165.onnx",
-                "reward": null,
-                "creation_time": 1684701126.1723087,
-                "auxillary_file_paths": [
-                    "results\\FinalHumanAgentTest\\EnemyAgent\\EnemyAgent-29165.pt"
-                ]
-            },
-            {
-                "steps": 65531,
-                "file_path": "results\\FinalHumanAgentTest\\EnemyAgent\\EnemyAgent-65531.onnx",
-                "reward": null,
-                "creation_time": 1684701716.7542012,
-                "auxillary_file_paths": [
-                    "results\\FinalHumanAgentTest\\EnemyAgent\\EnemyAgent-65531.pt"
-                ]
-            },
-            {
                 "steps": 91874,
                 "file_path": "results\\FinalHumanAgentTest\\EnemyAgent\\EnemyAgent-91874.onnx",
                 "reward": null,
@@ -45,15 +27,33 @@
                 "auxillary_file_paths": [
                     "results\\FinalHumanAgentTest\\EnemyAgent\\EnemyAgent-157065.pt"
                 ]
+            },
+            {
+                "steps": 192650,
+                "file_path": "results\\FinalHumanAgentTest\\EnemyAgent\\EnemyAgent-192650.onnx",
+                "reward": null,
+                "creation_time": 1684711134.3233185,
+                "auxillary_file_paths": [
+                    "results\\FinalHumanAgentTest\\EnemyAgent\\EnemyAgent-192650.pt"
+                ]
+            },
+            {
+                "steps": 499985,
+                "file_path": "results\\FinalHumanAgentTest\\EnemyAgent\\EnemyAgent-499985.onnx",
+                "reward": null,
+                "creation_time": 1684722836.352305,
+                "auxillary_file_paths": [
+                    "results\\FinalHumanAgentTest\\EnemyAgent\\EnemyAgent-499985.pt"
+                ]
             }
         ],
         "final_checkpoint": {
-            "steps": 157065,
+            "steps": 192650,
             "file_path": "results\\FinalHumanAgentTest\\EnemyAgent.onnx",
             "reward": null,
-            "creation_time": 1684708968.00688,
+            "creation_time": 1684711134.3233185,
             "auxillary_file_paths": [
-                "results\\FinalHumanAgentTest\\EnemyAgent\\EnemyAgent-157065.pt"
+                "results\\FinalHumanAgentTest\\EnemyAgent\\EnemyAgent-192650.pt"
             ]
         }
     },

@@ -49,7 +49,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &3102211288819816568
 RectTransform:
   m_ObjectHideFlags: 0
@@ -663,6 +663,8 @@ GameObject:
   - component: {fileID: 7391963687936864657}
   - component: {fileID: 7391963687944674997}
   - component: {fileID: 7391963688191660001}
+  - component: {fileID: 4659943600746512366}
+  - component: {fileID: 6274684263102740786}
   - component: {fileID: 7391963688191660000}
   - component: {fileID: 7391963688191660003}
   m_Layer: 0
@@ -731,10 +733,45 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4cfba7fc5e78b545b3fa863b0ab2e65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 888
-  maxHealth: 900
+  health: 100
+  maxHealth: 100
   speed: 0
   armor: 2
+--- !u!114 &4659943600746512366
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7391963687937132337}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: afb3acb701234584a8aeb6e56f813ea8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Cast: 0
+  SkillID: 0
+  Skills:
+  - {fileID: 6274684263102740786}
+  selectCircle: {fileID: 0}
+--- !u!114 &6274684263102740786
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7391963687937132337}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93cce6de6ce294e45a7ca5551e005cf9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bonusAttackSpeed: 150
+  bonusBulletSpeed: 30
+  timeDuration: 5
+  timeReload: 15
+  _bullet: {fileID: 2088339637601007145, guid: cd5553715871aaa41b215f4bb6f90d4d, type: 3}
+  _attribute: {fileID: 11400000, guid: b58f77a254ccd2a42bfa812feb0ecbfc, type: 2}
 --- !u!136 &7391963688191660000
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -3166,7 +3203,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &3342336444885724620
 RectTransform:
   m_ObjectHideFlags: 0

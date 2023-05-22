@@ -37,6 +37,14 @@ public class Bullet : MonoBehaviour
         }
     }
 
+    public void IncreaseSpeedBullet(object sender,float value)
+    {
+        speedBullet += value;
+    }
+    public void ReduceSpeedBullet(object sender,float value)
+    {
+        speedBullet -= value;
+    }
 
     // Самонаводка
     // private Transform _target;

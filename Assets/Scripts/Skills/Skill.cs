@@ -1,23 +1,14 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
 public abstract class Skill : MonoBehaviour
 {
-    [SerializeField] private Image skillIcon;
-    [SerializeField] private float skillCooldown;
+    public virtual AttributeSkill _attributeSkill { get; set; }
 
-    [SerializeField] private int openLvl;
-    
-    /*enum ActiveSKills
+    public virtual void ActivateSkill()
     {
-        
+        Debug.Log("Activate");
     }
-
-    enum PassiveSkills
-    {
-        
-    }
-    */
-
 }

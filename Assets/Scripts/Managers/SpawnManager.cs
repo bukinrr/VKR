@@ -3,8 +3,13 @@ using UnityEngine;
 public class SpawnManager : MonoBehaviour
 {
     [Header("Список врагов")] [SerializeField]
-    private GameObject[] arrayEnemy;
-    
+    private GameObject[] lvl1;
+
+    [SerializeField] private GameObject[] lvl2;
+    [SerializeField] private GameObject[] lvl3;
+    [SerializeField] private GameObject[] lvl4;
+    [SerializeField] private GameObject[] lvl5;
+
     private int waveNumber;
     private int countEnemy;
 
@@ -31,7 +36,23 @@ public class SpawnManager : MonoBehaviour
     {
         for (int i = 0; i < enemiesToSpawn; i++)
         {
-            Instantiate(arrayEnemy[Random.Range(0, arrayEnemy.Length)], EnemyPositon(), Quaternion.identity);
+            if (waveNumber == 0)
+            {
+                Instantiate(lvl1[Random.Range(0, lvl1.Length)], EnemyPositon(), Quaternion.identity);
+            }
+            else if (waveNumber == 1)
+            {
+                Instantiate(lvl2[Random.Range(0, lvl1.Length)], EnemyPositon(), Quaternion.identity);
+            }
+            else if (waveNumber == 2)
+            {
+                Instantiate(lvl3[Random.Range(0, lvl1.Length)], EnemyPositon(), Quaternion.identity);
+            }
+            else if (waveNumber == 3)
+            {
+                Instantiate(lvl4[Random.Range(0, lvl1.Length)], EnemyPositon(), Quaternion.identity);
+            }
+
         }
     }
 
