@@ -3,30 +3,25 @@ using UnityEngine;
 public class Enemy : Character
 {
     [SerializeField] protected GameObject player;
-
     [SerializeField] private GameObject managers;
     private ResourceManager _resourceManager;
     private MeleeWeapon _meleeWeapon;
-
     [SerializeField] private int coinPerDeath;
 
     void Start()
     {
         Init();
     }
-
-    void Update()
-    {
-        DestroyEnemy();
-        _meleeWeapon.EnemyAttack(player);
-    }
-    
-
     protected override void Init()
     {
         Rigidbody = GetComponent<Rigidbody>();
         _resourceManager = managers.GetComponent<ResourceManager>();
         _meleeWeapon = GetComponent<MeleeWeapon>();
+    }
+    void Update()
+    {
+        DestroyEnemy();
+        _meleeWeapon.EnemyAttack(player);
     }
 
     private void DestroyEnemy()

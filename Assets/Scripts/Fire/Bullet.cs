@@ -7,7 +7,7 @@ public class Bullet : MonoBehaviour
 
     private float _damage;
 
-    private float distanceTraveled = 0f;
+    private float distanceTraveled;
 
     public void Launch(float damage)
     {
@@ -17,6 +17,11 @@ public class Bullet : MonoBehaviour
 
 
     private void Update()
+    {
+        DestroyBullet();
+    }
+
+    private void DestroyBullet()
     {
         distanceTraveled += speedBullet * Time.deltaTime;
         if (distanceTraveled >= maxDistance)
@@ -30,9 +35,7 @@ public class Bullet : MonoBehaviour
         if (collision.transform.CompareTag("Enemy"))
         {
             Enemy targetEnemyComponent = collision.gameObject.GetComponent<Enemy>();
-            //Debug.Log($"Хп до удара {targetEnemyComponent.Health}");
             targetEnemyComponent.GetDamage(this, _damage);
-            //Debug.Log($"Хп после удара {targetEnemyComponent.Health}");
             Destroy(gameObject);
         }
     }
