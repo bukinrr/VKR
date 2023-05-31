@@ -3,10 +3,10 @@ using UnityEngine;
 public class Enemy : Character
 {
     [SerializeField] protected GameObject player;
-    [SerializeField] private GameObject managers;
-    private ResourceManager _resourceManager;
-    private MeleeWeapon _meleeWeapon;
     [SerializeField] private int coinPerDeath;
+    
+    private MeleeWeapon _meleeWeapon;
+    private ResourceManager resourceManager;
 
     void Start()
     {
@@ -14,21 +14,21 @@ public class Enemy : Character
     }
     protected override void Init()
     {
-        Rigidbody = GetComponent<Rigidbody>();
-        _resourceManager = managers.GetComponent<ResourceManager>();
         _meleeWeapon = GetComponent<MeleeWeapon>();
+        Rigidbody = GetComponent<Rigidbody>();
+        resourceManager = FindObjectOfType<ResourceManager>();
     }
     void Update()
     {
         DestroyEnemy();
-        _meleeWeapon.EnemyAttack(player);
+       _meleeWeapon.EnemyAttack(player);
     }
 
     private void DestroyEnemy()
     {
         if (Health <= 0)
         {
-            _resourceManager.AddCoins(coinPerDeath);
+            resourceManager.AddCoins(coinPerDeath);
             Destroy(gameObject);
         }
     }

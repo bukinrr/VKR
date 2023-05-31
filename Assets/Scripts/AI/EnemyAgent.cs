@@ -1,7 +1,5 @@
-using System;
 using UnityEngine;
 using Unity.MLAgents;
-using Random = UnityEngine.Random;
 using Unity.MLAgents.Sensors;
 using Unity.MLAgents.Actuators;
 
@@ -12,8 +10,7 @@ public class EnemyAgent : Agent
     [SerializeField] private Transform targetTransform;
 
     private Vector3 _startPosition;
-
-    //private Quaternion _targetRotation;
+    
     [SerializeField] private float speed;
 
     private void Start()
@@ -21,17 +18,8 @@ public class EnemyAgent : Agent
         _enemy = GetComponent<Enemy>();
         speed = _enemy.Speed;
         _rigidbody = GetComponent<Rigidbody>();
-        //_targetRotation = Quaternion.identity;
         _startPosition = transform.localPosition;
     }
-
-    // public override void OnEpisodeBegin()
-    // {
-    //     _rigidbody.angularVelocity = Vector3.zero;
-    //     _rigidbody.velocity = Vector3.zero;
-    //     transform.localPosition = TrainPosition();
-    //     //transform.localPosition = new Vector3(Random.Range(-Random.Range(10,24), Random.Range(Random.Range(10,24))));
-    // }
 
     public override void CollectObservations(VectorSensor sensor)
     {
@@ -70,7 +58,6 @@ public class EnemyAgent : Agent
 
         if (distanceToTarget < 3.6f)
         {
-            //Debug.Log("Подошел к 1");
             AddReward(2f);
         }
         else if (distanceToTarget >= 22)
@@ -78,16 +65,7 @@ public class EnemyAgent : Agent
             AddReward(-1f);
         }
     }
-
-    // public Vector3 TrainPosition()
-    // {
-    //     float rndX = Random.Range(minBorder, maxBorder);
-    //     float rndZ = Random.Range(minBorder, maxBorder);
-    //     float rndXMinus = -Random.Range(minBorder, maxBorder);
-    //     float rndZMinus = -Random.Range(minBorder, maxBorder);
-    //     
-    //     return new Vector3(Random.Range(rndXMinus, rndX), 0f, Random.Range(rndZMinus, rndZ));
-    // }
+    
 
     private void OnTriggerEnter(Collider other)
     {
@@ -96,10 +74,10 @@ public class EnemyAgent : Agent
             AddReward(-0.05f);
         }
 
-        // if (other.CompareTag("Bullet"))
-        // {
-        //     AddReward(-0.03f);
-        // }
+        if (other.CompareTag("Bullet"))
+        {
+            AddReward(-0.03f);
+        }
     }
 
     private void OnTriggerStay(Collider other)
@@ -107,8 +85,25 @@ public class EnemyAgent : Agent
         if (other.CompareTag("Wall"))
         {
             SetReward(-100f);
-            Debug.Log("Стоит у стены");
             Destroy(gameObject);
         }
     }
 }
+
+// public override void OnEpisodeBegin()
+// {
+//     _rigidbody.angularVelocity = Vector3.zero;
+//     _rigidbody.velocity = Vector3.zero;
+//     transform.localPosition = TrainPosition();
+//     //transform.localPosition = new Vector3(Random.Range(-Random.Range(10,24), Random.Range(Random.Range(10,24))));
+// }
+
+// public Vector3 TrainPosition()
+// {
+//     float rndX = Random.Range(minBorder, maxBorder);
+//     float rndZ = Random.Range(minBorder, maxBorder);
+//     float rndXMinus = -Random.Range(minBorder, maxBorder);
+//     float rndZMinus = -Random.Range(minBorder, maxBorder);
+//     
+//     return new Vector3(Random.Range(rndXMinus, rndX), 0f, Random.Range(rndZMinus, rndZ));
+// }

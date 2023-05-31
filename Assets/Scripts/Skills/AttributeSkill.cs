@@ -1,4 +1,3 @@
-using System.Net.NetworkInformation;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Attribute", menuName = "Spell/SpellAttribute")]

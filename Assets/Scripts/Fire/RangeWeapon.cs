@@ -8,7 +8,8 @@ public class RangeWeapon : Weapon
         None,
         SingleFireMode,
         BurstFireMode,
-        FullAutoFireMode
+        FullAutoFireMode,
+        ShotgunMode
     }
 
     [SerializeField] private GameObject bulletPrefab;

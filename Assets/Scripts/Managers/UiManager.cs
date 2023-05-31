@@ -1,33 +1,33 @@
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class UiManager : MonoBehaviour
 {
-    //[SerializeField] private GameObject coinText;
-
-    [SerializeField] private TMP_Text coinTMPText;
-    [SerializeField] private Text coinText;
-    private int coin;
+    [SerializeField] public TMP_Text coinTMPText;
 
     [SerializeField] private Image timerBar;
     [SerializeField] public float matTime;
     private float timeLeft;
-
-    private void Start()
-    {
-        timeLeft = matTime;
-    }
+    private ResourceManager _resourceManager;
 
     private void Awake()
     {
+        _resourceManager = GetComponent<ResourceManager>();
+        coinTMPText.text = _resourceManager.Coin.ToString();
+        timeLeft = matTime;
+
     }
 
     private void Update()
     {
         TimerRound();
-        coinTMPText.text = $"{coin}";
-        //ChangeCoin(coin);
+    }
+    
+    public void ChangeCoin(int value)
+    {
+        coinTMPText.text = value.ToString();
     }
 
     private void TimerRound()
@@ -37,26 +37,13 @@ public class UiManager : MonoBehaviour
             timeLeft -= Time.deltaTime;
             timerBar.fillAmount = timeLeft / matTime;
         }
-        else
-        {
-            
-        }
     }
 
-    public void ChangeCoin(int value)
+    public void CallTimerRound()
     {
-        coin = value;
-        Debug.Log(coin);
-        coinTMPText.text = $"{coin}";
+        TimerRound();
     }
 
-    public void ChangeCoinValue(int value)
-    {
-        Debug.Log("Метод ChangeCoinValue выполнен");
-        coinTMPText.text = value.ToString();
-        // if (_coinTMPText != null)
-        // {
-        //     
-        // }   
-    }
+    
+    
 }
