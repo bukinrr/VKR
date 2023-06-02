@@ -6,7 +6,18 @@ public class UiManager : MonoBehaviour
 {
     //MONEY COIN TEXT
     [SerializeField] private TMP_Text coinTMPText;
+    //WAVE TEXT
     [SerializeField] private TMP_Text waveTMPText;
+    //PISTOL AMMO
+    [SerializeField] private TMP_Text pistolAmmoText;
+    [SerializeField] private RangeWeapon pistolWeapon;
+    //RIFLE AMMO
+    [SerializeField] private TMP_Text rifleAmmoText;
+    [SerializeField] private RangeWeapon rifleWeapon;
+    //AUTO AMMO
+    [SerializeField] private TMP_Text autoAmmoText;
+    [SerializeField] private RangeWeapon autoWeapon;
+
 
     // TIMERBAR
     [SerializeField] private Image timerBar;
@@ -26,6 +37,11 @@ public class UiManager : MonoBehaviour
         _resourceManager = GetComponent<ResourceManager>();
         _resourceManager.OnCoinChanged += OnCoinChanged;
         _resourceManager.OnWaveChanged += OnWaveChanged;
+
+        pistolWeapon.OnAmmoChanged += OnPistolAmmoChanged;
+        rifleWeapon.OnAmmoChanged += OnRifleAmmoChanged;
+        autoWeapon.OnAmmoChanged += OnAutoAmmoChanged;
+        
         coinTMPText.text = _resourceManager.Coin.ToString();
         _timeLeft = matTime;
     }
@@ -38,6 +54,18 @@ public class UiManager : MonoBehaviour
     {
         ChangeWave(_resourceManager.Wave);
     }
+    private void OnPistolAmmoChanged(object sender, System.EventArgs e)
+    {
+        ChangePistolAmmo(pistolWeapon.CurrentAmmoString);
+    }
+    private void OnRifleAmmoChanged(object sender, System.EventArgs e)
+    {
+        ChangeRifleAmmo(rifleWeapon.CurrentAmmoString);
+    }
+    private void OnAutoAmmoChanged(object sender, System.EventArgs e)
+    {
+        ChangeAutomatAmmo(autoWeapon.CurrentAmmoString);
+    }
     private void ChangeCoin(int value)
     {
         coinTMPText.text = value.ToString();
@@ -46,6 +74,18 @@ public class UiManager : MonoBehaviour
     private void ChangeWave(int value)
     {
         waveTMPText.text = value.ToString();
+    }
+    private void ChangePistolAmmo(string pistolAmmoValue)
+    {
+        pistolAmmoText.text = pistolAmmoValue;
+    }
+    private void ChangeRifleAmmo(string rifleAmmoValue)
+    {
+        rifleAmmoText.text = rifleAmmoValue;
+    }
+    private void ChangeAutomatAmmo(string autoAmmoValue)
+    {
+        autoAmmoText.text = autoAmmoValue;
     }
     
     private void Update()

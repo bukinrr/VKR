@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -16,21 +17,22 @@ public class RangeWeapon : Weapon
     [SerializeField] private float attackRange;
     [SerializeField] private float reloadTime;
     [SerializeField] private int maxCountBulletInMagazine;
-    [SerializeField] private int maxMaxCountBullet;
     [SerializeField] protected FireMode RangeFireMode;
     [SerializeField] private Transform bulletSpawnPoint;
 
+    public EventHandler OnAmmoChanged;
+
     private int _currentAmmoInMagazine;
+    private string currentAmmoString;
 
     private float _attackTime;
     private float _lastAttackTime;
     private bool _reload = false;
 
-
-    private int MaxCountBullet
+    public string CurrentAmmoString
     {
-        get => maxMaxCountBullet;
-        set => maxMaxCountBullet = Mathf.Clamp(value, 0, 500);
+        get => currentAmmoString;
+        private set => currentAmmoString = value;
     }
 
     private void Start()
@@ -43,6 +45,7 @@ public class RangeWeapon : Weapon
         AttackType = RangeType.Range;
         _attackTime = GetTotalAttackSpeed();
         _currentAmmoInMagazine = maxCountBulletInMagazine;
+        currentAmmoString = $"{_currentAmmoInMagazine}/ {maxCountBulletInMagazine}";
     }
 
     public void LaunchShoot()
@@ -111,7 +114,18 @@ public class RangeWeapon : Weapon
             bullet.transform.forward = direction;
 
             bullet.GetComponent<Bullet>().Launch(Damage);
+
             _currentAmmoInMagazine -= 1;
+            UpdateUIAmmoString();
+        }
+    }
+
+    private void UpdateUIAmmoString()
+    {
+        CurrentAmmoString = $"{_currentAmmoInMagazine}/{maxCountBulletInMagazine}";
+        if (OnAmmoChanged != null)
+        {
+            OnAmmoChanged(this, EventArgs.Empty);
         }
     }
 
@@ -128,7 +142,10 @@ public class RangeWeapon : Weapon
 
         _reload = true;
         _currentAmmoInMagazine += maxCountBulletInMagazine;
+
         yield return new WaitForSeconds(reloadTime);
+
+        UpdateUIAmmoString();
         _reload = false;
     }
 }

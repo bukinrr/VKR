@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class SpawnManager : MonoBehaviour
 {
@@ -23,12 +24,13 @@ public class SpawnManager : MonoBehaviour
     private ResourceManager _resourceManager;
     private WaitForSeconds _timeEntryEnemies = new WaitForSeconds(2f);
 
-    private Vector3 _leftPosition = new Vector3(-21, 0, 1.5f);
-    private Vector3 _mainPosition = new Vector3(-0.7f, 0, 21f);
-    private Vector3 _rightPosition = new Vector3(20, 0, 1.5f);
+    private Vector3 _leftPosition;
+    private Vector3 _mainPosition;
+    private Vector3 _rightPosition;
     private Vector3[] _enemyPositions;
 
     private int _countEnemy;
+    private int positionIndex;
     private bool _isCreateWave;
 
     private void Awake()
@@ -40,7 +42,6 @@ public class SpawnManager : MonoBehaviour
     {
         _uiManager = GetComponent<UiManager>();
         _resourceManager = GetComponent<ResourceManager>();
-        _enemyPositions = new Vector3[] { _leftPosition, _mainPosition, _rightPosition };
     }
 
     void Update()
@@ -138,12 +139,16 @@ public class SpawnManager : MonoBehaviour
     {
         //var listEnemyWave = GetNumberEnemyPrefabList(_waveNumber);
         var listEnemyWave = GetNumberEnemyPrefabList(_resourceManager.Wave);
+        
+        positionIndex = 0;
 
-        int positionIndex = 0;
-
-        foreach (var enemy  in listEnemyWave)
+        foreach (var enemy in listEnemyWave)
         {
-            Vector3 uniqueSpawnPosition = GetUniqueSpawnPosition(_enemyPositions, ref positionIndex);
+            Vector3 uniqueSpawnPosition = GetUniqueSpawnPosition();
+            positionIndex++;
+            if (positionIndex == 3)
+                positionIndex = 0;
+            
             Instantiate(enemy, EnemyPositon(), Quaternion.identity);
         }
 
@@ -166,15 +171,36 @@ public class SpawnManager : MonoBehaviour
         float rndZ = Random.Range(minBorder, maxBorder);
         float rndXMinus = -Random.Range(minBorder, maxBorder);
         float rndZMinus = -Random.Range(minBorder, maxBorder);
-
+        
         return new Vector3(Random.Range(rndXMinus, rndX), 0, Random.Range(rndZMinus, rndZ));
+        // if (enemy.name.Split("_")[0] == "Ogre")
+        // {
+        //     if (Random.Range(0, 1) == 0)
+        //     {
+        //         var leftSide = new Vector3(-21, 0, 1.5f);
+        //         return Vector3.left;
+        //     }
+        //     else
+        //     {
+        //         var rightSide = new Vector3(20, 0, 1.5f);
+        //         return rightSide;
+        //     }
+        // }
+        // else
+        // {
+        //     var mainSide = new Vector3(-0.7f, 0, 21f);
+        //     return mainSide;
+        // }
     }
 
-    private Vector3 GetUniqueSpawnPosition(Vector3[] positions, ref int currentIndex)
+    private Vector3 GetUniqueSpawnPosition()
     {
-        Vector3 spawnPosition = positions[currentIndex];
+        _leftPosition = new Vector3(-21, 0, 1.5f);
+        _mainPosition = new Vector3(-0.7f, 0, 21f);
+        _rightPosition = new Vector3(20, 0, 1.5f);
+        _enemyPositions = new[] { _leftPosition, _mainPosition, _rightPosition };
+        Vector3 spawnPosition = _enemyPositions[positionIndex];
 
-        currentIndex++;
         // if (currentIndex >= positions.Length)
         // {
         //     currentIndex = 0;
