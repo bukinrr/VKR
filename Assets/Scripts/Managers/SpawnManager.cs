@@ -1,7 +1,5 @@
-using System;
 using System.Collections;
 using UnityEngine;
-using Random = UnityEngine.Random;
 
 public class SpawnManager : MonoBehaviour
 {
@@ -22,46 +20,65 @@ public class SpawnManager : MonoBehaviour
     [SerializeField] private GameObject[] gates;
 
     private UiManager _uiManager;
-    private WaitForSeconds timeEntryEnemies = new WaitForSeconds(2f);
+    private ResourceManager _resourceManager;
+    private WaitForSeconds _timeEntryEnemies = new WaitForSeconds(2f);
 
-    private int waveNumber;
-    private int countEnemy;
+    private Vector3 _leftPosition = new Vector3(-21, 0, 1.5f);
+    private Vector3 _mainPosition = new Vector3(-0.7f, 0, 21f);
+    private Vector3 _rightPosition = new Vector3(20, 0, 1.5f);
+    private Vector3[] _enemyPositions;
+
+    private int _countEnemy;
+    private bool _isCreateWave;
 
     private void Awake()
     {
+        Init();
+    }
+
+    private void Init()
+    {
         _uiManager = GetComponent<UiManager>();
+        _resourceManager = GetComponent<ResourceManager>();
+        _enemyPositions = new Vector3[] { _leftPosition, _mainPosition, _rightPosition };
     }
 
     void Update()
     {
-        CountEnemy();
+        //NeedCreateWave();
         NewWaveRound();
     }
 
+    // private bool NeedCreateWave()
+    // {
+    //     if (_countEnemy == 0 && _isCreateWave== false) 
+    //     {
+    //         
+    //     }
+    // }
+
     private void NewWaveRound()
     {
-        countEnemy = FindObjectsOfType<Enemy>().Length;
+        _countEnemy = FindObjectsOfType<Enemy>().Length;
 
-        if (countEnemy == 0)
+        if (_countEnemy == 0 && _isCreateWave == false)
         {
-            StartCoroutine(UpAndDownGates());
+            _isCreateWave = true;
+            _resourceManager.AddWave(1);
+            //StartCoroutine(UpAndDownGates());
+            SpawnEnemyWave();
+            _uiManager.ResetTimer();
+            Debug.Log($"Создается волна под номером: {_resourceManager.Wave}");
         }
-    }
-
-    private void UIAndEffects()
-    {
     }
 
     private IEnumerator UpAndDownGates()
     {
         ChangePositionGate(gatesMove: GatesMove.Up);
 
-        yield return timeEntryEnemies;
-        
+        yield return _timeEntryEnemies;
+
         ChangePositionGate(gatesMove: GatesMove.Down);
-        
-        yield return this;
-        SpawnEnemyWave(1);
     }
 
     private void ChangePositionGate(GatesMove gatesMove)
@@ -84,46 +101,62 @@ public class SpawnManager : MonoBehaviour
                 gate.SetActive(true);
             }
 
-            Vector3.Lerp(startPosition, endPosition, timeRelease);
+            gate.transform.position = Vector3.Lerp(startPosition, endPosition, timeRelease);
         }
     }
 
-    private void CountEnemy()
+    private GameObject[] GetNumberEnemyPrefabList(int numberWave)
     {
-        countEnemy = FindObjectsOfType<Enemy>().Length;
-        // if (countEnemy == 0)
+        switch (numberWave % 10)
+        {
+            case 1:
+                return lvl1;
+            case 2:
+                return lvl2;
+            case 3:
+                return lvl3;
+            case 4:
+                return lvl4;
+            case 5:
+                return lvl5;
+            case 6:
+                return lvl1;
+            case 7:
+                return lvl2;
+            case 8:
+                return lvl3;
+            case 9:
+                return lvl4;
+            case 0:
+                return lvl5;
+        }
+
+        return null;
+    }
+
+    private void SpawnEnemyWave()
+    {
+        //var listEnemyWave = GetNumberEnemyPrefabList(_waveNumber);
+        var listEnemyWave = GetNumberEnemyPrefabList(_resourceManager.Wave);
+
+        int positionIndex = 0;
+
+        foreach (var enemy  in listEnemyWave)
+        {
+            Vector3 uniqueSpawnPosition = GetUniqueSpawnPosition(_enemyPositions, ref positionIndex);
+            Instantiate(enemy, EnemyPositon(), Quaternion.identity);
+        }
+
+
+        // foreach (var enemyObject in listEnemyWave)
         // {
-        //     waveNumber++;
-        //     SpawnEnemyWave(waveNumber);
+        //     Vector3 uniqueSpawnPosition = GetUniqueSpawnPosition(_enemyPositions, ref positionIndex);
+        //     Instantiate(enemyObject, uniqueSpawnPosition, Quaternion.identity);
         // }
-        if (countEnemy == 0)
-        {
-            SpawnEnemyWave(1);
-        }
+
+        _isCreateWave = false;
     }
 
-    private void SpawnEnemyWave(int enemiesToSpawn)
-    {
-        for (int i = 0; i < enemiesToSpawn; i++)
-        {
-            if (waveNumber == 0)
-            {
-                Instantiate(lvl1[Random.Range(0, lvl1.Length)], EnemyPositon(), Quaternion.identity);
-            }
-            else if (waveNumber == 1)
-            {
-                Instantiate(lvl2[Random.Range(0, lvl1.Length)], EnemyPositon(), Quaternion.identity);
-            }
-            else if (waveNumber == 2)
-            {
-                Instantiate(lvl3[Random.Range(0, lvl1.Length)], EnemyPositon(), Quaternion.identity);
-            }
-            else if (waveNumber == 3)
-            {
-                Instantiate(lvl4[Random.Range(0, lvl1.Length)], EnemyPositon(), Quaternion.identity);
-            }
-        }
-    }
 
     private Vector3 EnemyPositon()
     {
@@ -135,5 +168,18 @@ public class SpawnManager : MonoBehaviour
         float rndZMinus = -Random.Range(minBorder, maxBorder);
 
         return new Vector3(Random.Range(rndXMinus, rndX), 0, Random.Range(rndZMinus, rndZ));
+    }
+
+    private Vector3 GetUniqueSpawnPosition(Vector3[] positions, ref int currentIndex)
+    {
+        Vector3 spawnPosition = positions[currentIndex];
+
+        currentIndex++;
+        // if (currentIndex >= positions.Length)
+        // {
+        //     currentIndex = 0;
+        // }
+
+        return spawnPosition;
     }
 }

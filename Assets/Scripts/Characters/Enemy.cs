@@ -4,9 +4,10 @@ public class Enemy : Character
 {
     [SerializeField] protected GameObject player;
     [SerializeField] private int coinPerDeath;
-    
+    [SerializeField] private int experiencePerDeath;
+
     private MeleeWeapon _meleeWeapon;
-    private ResourceManager resourceManager;
+    private ResourceManager _resourceManager;
 
     void Start()
     {
@@ -16,7 +17,7 @@ public class Enemy : Character
     {
         _meleeWeapon = GetComponent<MeleeWeapon>();
         Rigidbody = GetComponent<Rigidbody>();
-        resourceManager = FindObjectOfType<ResourceManager>();
+        _resourceManager = FindObjectOfType<ResourceManager>();
     }
     void Update()
     {
@@ -28,7 +29,8 @@ public class Enemy : Character
     {
         if (Health <= 0)
         {
-            resourceManager.AddCoins(coinPerDeath);
+            _resourceManager.AddCoins(coinPerDeath);
+            _resourceManager.AddExperinceR(experiencePerDeath);
             Destroy(gameObject);
         }
     }

@@ -16,7 +16,7 @@ public class ShkvallSnaryadov : Skill
     [SerializeField] private AttributeSkill _attribute;
     public override AttributeSkill _attributeSkill
     {
-        get { return _attributeSkill; }
+        get => _attributeSkill;
         set { _attributeSkill = value; }
     }
 
@@ -32,7 +32,7 @@ public class ShkvallSnaryadov : Skill
 
     public override void ActivateSkill()
     {
-        IEIncreaseAttackAndBulletSpeed();
+        StartCoroutine(IEIncreaseAttackAndBulletSpeed());
     }
 
     private IEnumerator IEIncreaseAttackAndBulletSpeed()
