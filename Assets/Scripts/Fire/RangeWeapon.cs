@@ -32,6 +32,7 @@ public class RangeWeapon : Weapon
     private float _lastAttackTime;
     private bool _reload = false;
 
+    
     public int LvlUnlock => lvlUnlock;
     public int SpeedBullet
     {
