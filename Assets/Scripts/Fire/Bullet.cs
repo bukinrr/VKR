@@ -9,6 +9,11 @@ public class Bullet : MonoBehaviour
 
     private float distanceTraveled;
 
+    public float SpeedBullet
+    {
+        get => speedBullet;
+        set => speedBullet = value;
+    }
     public void Launch(float damage)
     {
         _damage = damage;

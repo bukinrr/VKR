@@ -43,7 +43,7 @@ public abstract class Weapon : MonoBehaviour
 
     public void IncreaseAttackSpeed(object sender, int amount)
     {
-        AttackSpeed -= amount;
+        AttackSpeed += amount;
     }
 
     public void ReduceAttackSpeed(object sender, int amount)

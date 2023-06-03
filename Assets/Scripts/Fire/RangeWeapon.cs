@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Net.NetworkInformation;
 using UnityEngine;
 
 public class RangeWeapon : Weapon
@@ -19,6 +20,8 @@ public class RangeWeapon : Weapon
     [SerializeField] private int maxCountBulletInMagazine;
     [SerializeField] protected FireMode RangeFireMode;
     [SerializeField] private Transform bulletSpawnPoint;
+    [SerializeField] private int speedBullet;
+    [SerializeField] private int lvlUnlock;
 
     public EventHandler OnAmmoChanged;
 
@@ -29,10 +32,31 @@ public class RangeWeapon : Weapon
     private float _lastAttackTime;
     private bool _reload = false;
 
+    public int LvlUnlock => lvlUnlock;
+    public int SpeedBullet
+    {
+        get => speedBullet;
+        internal set => speedBullet = value;
+    }
     public string CurrentAmmoString
     {
         get => currentAmmoString;
         private set => currentAmmoString = value;
+    }
+    public int MaxCountBulletInMagazine
+    {
+        get => maxCountBulletInMagazine;
+        internal set => maxCountBulletInMagazine = value;
+    }
+
+    public void IncreaseSpeedBullet(object sender, int amount)
+    {
+        speedBullet += amount;
+    }
+
+    public void IncreaseMaxCountBulletInMagaizne(object sender, int amount)
+    {
+        maxCountBulletInMagazine += amount;
     }
 
     private void Start()
@@ -112,15 +136,19 @@ public class RangeWeapon : Weapon
             GameObject bullet = Instantiate(bulletPrefab, bulletSpawnPoint.position, Quaternion.identity);
 
             bullet.transform.forward = direction;
+            
+            var bulletComp = bullet.GetComponent<Bullet>();
+            
+            bulletComp.SpeedBullet = SpeedBullet;
 
-            bullet.GetComponent<Bullet>().Launch(Damage);
+            bulletComp.Launch(Damage);
 
             _currentAmmoInMagazine -= 1;
             UpdateUIAmmoString();
         }
     }
 
-    private void UpdateUIAmmoString()
+    internal void UpdateUIAmmoString()
     {
         CurrentAmmoString = $"{_currentAmmoInMagazine}/{maxCountBulletInMagazine}";
         if (OnAmmoChanged != null)
