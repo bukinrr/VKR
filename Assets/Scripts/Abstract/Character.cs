@@ -18,6 +18,8 @@ public abstract class Character : MonoBehaviour
         protected set => health = Mathf.Clamp(value, 0, maxHealth);
     }
 
+    public float MaxHealth => maxHealth;
+
     public float Armor
     {
         get => armor;

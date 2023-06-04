@@ -1,8 +1,10 @@
+using System;
 using UnityEngine;
 
 public class PlayerController : Character
 {
     private RangeWeapon _rangeWeapon;
+    
 
     void Start()
     {
@@ -11,8 +13,8 @@ public class PlayerController : Character
 
     void Update()
     {
-        DestroyPlayer();
         _rangeWeapon.LaunchShoot();
+        DestroyPlayer();
     }
 
     protected override void Init()
@@ -26,4 +28,5 @@ public class PlayerController : Character
         if (Health <= 0)
             Destroy(gameObject);
     }
+    
 }

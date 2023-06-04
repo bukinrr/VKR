@@ -60,12 +60,27 @@ public class SpawnManager : MonoBehaviour
 
     private void NewWaveRound()
     {
-        _countEnemy = FindObjectsOfType<Enemy>().Length;
+        var currentArrayEnemy = FindObjectsOfType<Enemy>();
+        _countEnemy = currentArrayEnemy.Length;
 
         if (_countEnemy == 0 && _isCreateWave == false)
         {
             _isCreateWave = true;
             _resourceManager.AddWave(1);
+            //StartCoroutine(UpAndDownGates());
+            SpawnEnemyWave();
+            _uiManager.ResetTimer();
+            Debug.Log($"Создается волна под номером: {_resourceManager.Wave}");
+        }
+
+        if (_uiManager.IsWaveTimeExpired())
+        {
+            foreach (var enemy in currentArrayEnemy)
+            {
+                enemy.DestroyEnemySpawnManager();
+            }
+            
+            _isCreateWave = true;
             //StartCoroutine(UpAndDownGates());
             SpawnEnemyWave();
             _uiManager.ResetTimer();
@@ -172,7 +187,7 @@ public class SpawnManager : MonoBehaviour
         float rndXMinus = -Random.Range(minBorder, maxBorder);
         float rndZMinus = -Random.Range(minBorder, maxBorder);
         
-        return new Vector3(Random.Range(rndXMinus, rndX), 0, Random.Range(rndZMinus, rndZ));
+        return new Vector3(Random.Range(rndXMinus, rndX), 0, Random.Range(0, rndZ));
         // if (enemy.name.Split("_")[0] == "Ogre")
         // {
         //     if (Random.Range(0, 1) == 0)

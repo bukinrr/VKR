@@ -34,4 +34,9 @@ public class Enemy : Character
             Destroy(gameObject);
         }
     }
+
+    public void DestroyEnemySpawnManager()
+    {
+        Destroy(gameObject);
+    }
 }

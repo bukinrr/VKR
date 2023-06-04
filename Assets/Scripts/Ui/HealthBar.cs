@@ -24,7 +24,6 @@ public class HealthBar : MonoBehaviour
 
     public void OnHealthChanged(float valueAsPercantage)
     {
-        Debug.Log($"Percantage = {valueAsPercantage}");
         healthBarFilling.fillAmount = valueAsPercantage;
     }
 
