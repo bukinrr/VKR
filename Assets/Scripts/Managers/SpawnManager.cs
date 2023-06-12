@@ -17,6 +17,10 @@ public class SpawnManager : MonoBehaviour
     [SerializeField] private GameObject[] lvl3;
     [SerializeField] private GameObject[] lvl4;
     [SerializeField] private GameObject[] lvl5;
+    [SerializeField] private GameObject[] lvl6;
+    [SerializeField] private GameObject[] lvl7;
+    [SerializeField] private GameObject[] lvl8;
+    [SerializeField] private GameObject[] lvl9;
 
     [SerializeField] private GameObject[] gates;
 
@@ -136,15 +140,15 @@ public class SpawnManager : MonoBehaviour
             case 5:
                 return lvl5;
             case 6:
-                return lvl1;
+                return lvl6;
             case 7:
-                return lvl2;
+                return lvl7;
             case 8:
-                return lvl3;
+                return lvl8;
             case 9:
-                return lvl4;
+                return lvl8;
             case 0:
-                return lvl5;
+                return lvl9;
         }
 
         return null;
