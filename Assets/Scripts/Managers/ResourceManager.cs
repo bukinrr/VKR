@@ -5,7 +5,7 @@ public class ResourceManager : MonoBehaviour
 {
     [SerializeField] private UiManager uiManager;
     [SerializeField] private LevelWindow _levelWindow;
-    [SerializeField] private SwitchWeapon _switchWeapon;
+    [SerializeField] private UiWeapon uiWeapon;
     LevelSystem _levelSystem;
 
     public event EventHandler OnCoinChanged;
@@ -30,7 +30,7 @@ public class ResourceManager : MonoBehaviour
     {
         _levelSystem = new LevelSystem();
         _levelWindow.SetLevelSystem(_levelSystem);
-        _switchWeapon.SetLevelSystem(_levelSystem);
+        uiWeapon.SetLevelSystem(_levelSystem);
     }
 
     public void AddCoins(int coinsValue)
