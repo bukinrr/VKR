@@ -4,5 +4,8 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/VKR.unity
+    guid: 03d5a6d28fa2c72488953fdc443ba2ab
   m_configObjects: {}
